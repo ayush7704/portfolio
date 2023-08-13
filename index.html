@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--======== font  ===========-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
+
+    <!--========= styling ==========-->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            z-index: 0;
+        }
+
+        body,
+        html {
+            scroll-behavior: smooth;
+            background-color: #151515;
+            color: white;
+            text-transform: uppercase;
+            /* // font-family: 'Krona One', sans-serif; */
+            font-family: 'Istok Web', sans-serif;
+            height: 100%;
+            /* padding-bottom: 100vh; */
+            overflow-x: hidden;
+            scroll-padding-top: var(--scrolltop, 80px);
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* //========== important classes  */
+        .text-center {
+            text-align: center;
+        }
+
+        .gray {
+            color: #a2a2a2;
+        }
+
+        .pd-10 {
+            padding: 10px;
+        }
+
+        .py-1rem {
+            padding: 1rem 0;
+        }
+
+        .my-10 {
+            margin: 10px 0;
+        }
+
+        .m-10 {
+            margin: 10px;
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        .d-block {
+            display: block;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .d-flexA {
+            display: flex;
+            align-items: center;
+        }
+
+        .d-flexSB {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .d-flexAJ {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .d-flexAJ-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dgridCenter {
+            display: grid;
+            place-items: center;
+        }
+
+        .d-grid-sb {
+            display: grid;
+            align-content: space-between;
+        }
+
+        .d-grid-300 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(var(--gridWidth, 300px), 1fr));
+        }
+
+        .gap1 {
+            gap: 1rem;
+        }
+
+        .slide {
+            opacity: 0;
+            transform: translateX(-30%);
+        }
+
+        .noslide {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* //============= main container  ============*/
+        main {
+            min-height: 100vh;
+        }
+
+        main .loaderpage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(10, 10, 10);
+            color: white;
+            text-transform: uppercase;
+            z-index: 10;
+            /* display: none; */
+        }
+
+        .loaderpage .green {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            height: 100vh;
+            background-color: greenyellow;
+        }
+
+        .loaderpage .parent {
+            display: inline-block;
+            overflow-x: hidden;
+        }
+
+        .loadermiddle .parent .child {
+            opacity: 0;
+        }
+
+        .loaderpage .parent .child {
+            display: inline-block;
+        }
+
+        .loaderpage .loadermiddle .parent .child {
+            display: inline-block;
+            transform: translateX(60%);
+            color: greenyellow;
+        }
+
+        .loadermiddle .parent .child-last-child {
+            display: block;
+            transform: translate(200%);
+        }
+
+        .loaderdown {
+            display: grid;
+            justify-self: center;
+        }
+
+        .loader {
+            width: 4vh;
+            height: 4vh;
+            border-radius: 50%;
+            border: 4px solid white;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+            transition: all 1s linear;
+            animation: load 0.5s linear infinite;
+        }
+
+        @keyframes load {
+            100% {
+                rotate: 360deg;
+            }
+        }
+
+        /* //========== nav  */
+        nav {
+            padding: 10px 5%;
+            z-index: 5;
+            position: sticky;
+            top: 0;
+            background-color: rgba(49, 45, 66, .1);
+            backdrop-filter: blur(4px);
+        }
+
+        nav .img {
+            width: 60px;
+            height: 60px;
+            display: inline-block;
+            padding: 3px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav .img .before {
+            content: '';
+            width: 100%;
+            inset: 0;
+            z-index: -1;
+            height: 100%;
+            animation: rotate 1s linear infinite;
+            position: absolute;
+            background: linear-gradient(to right, gray 20%, #90ff02 112%);
+        }
+
+        @keyframes rotate {
+            100% {
+                rotate: 360deg;
+            }
+        }
+
+        nav .img img {
+            border-radius: 50%;
+            top: 0;
+            width: 100%;
+        }
+
+        .name {
+            color: transparent;
+            -webkit-text-stroke: 0px white;
+            text-stroke: 1px white;
+            text-align: center;
+            -webkit-text-fill-color: black;
+        }
+
+        nav .hamburger {
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        nav .bookmarks {
+            position: absolute;
+            width: 50%;
+            min-height: 100dvh;
+            top: var(--navheight, 80px);
+            left: 0;
+            overflow-y: clip;
+        }
+
+        .bookmark {
+            width: 150%;
+            top: 0;
+            left: -30%;
+            height: 100%;
+            border-left: none;
+            text-align: end;
+            position: absolute;
+            border-radius: 20px;
+        }
+
+        .bookmark a:nth-child(1) {
+            position: absolute;
+            inset: 0;
+        }
+
+        .bookmark a:nth-child(2) {
+            position: absolute;
+            top: 5%;
+            right: 10%;
+            font-weight: 600;
+        }
+
+        .bookmark:nth-child(1) {
+            rotate: 3deg;
+            transform: translateY(3%);
+            overflow: hidden;
+            box-shadow: 0 0 5px 1px #d72dff;
+        }
+
+        .bookmark:nth-child(1):before {
+            content: '';
+            position: absolute;
+            inset: -35% 0 0 0;
+            background: url(slopes.webp) repeat center/cover;
+
+        }
+
+        .bookmark:nth-child(1) a:nth-child(2) {
+            rotate: -3deg;
+        }
+
+        .bookmark:nth-child(2) {
+            rotate: 8deg;
+            background-color: #151515;
+            transform: translate(20px, 19%);
+            box-shadow: 0 0 5px 1px white;
+        }
+
+        .bookmark:nth-child(2) a:nth-child(2) {
+            rotate: -8deg;
+        }
+
+        .bookmark:nth-child(3) {
+            rotate: 13deg;
+            background-color: rgb(40 40 40);
+            transform: translate(40px, 35%);
+            box-shadow: 0 0 5px 1px #ebe97a;
+        }
+
+        .bookmark:nth-child(3) a:nth-child(2) {
+            rotate: -13deg;
+        }
+
+        .bookmark:nth-child(4) {
+            rotate: 18deg;
+            background-color: #151515;
+            transform: translate(60px, 51%);
+            box-shadow: 0 0 5px 1px rgb(85, 26, 139);
+        }
+
+        .bookmark:nth-child(4) a:nth-child(2) {
+            rotate: -18deg;
+        }
+
+        /* //========= home  */
+
+
+        .home {
+            text-transform: uppercase;
+            padding: 20px;
+            position: relative;
+        }
+
+        .home::before {
+            position: absolute;
+            inset: 0;
+            content: '';
+            filter: brightness(0.7);
+            z-index: -1;
+            background: url(slopes.webp) no-repeat center/cover;
+        }
+
+
+        .home h1:nth-child(1) {
+            font-size: 7vw;
+            padding-bottom: 0;
+        }
+
+        .home h1:nth-child(2) {
+            margin-bottom: 10px;
+            font-size: 8vw;
+        }
+
+        .skillcontainer {
+            position: relative;
+            height: 9vw;
+            font-size: 5vw;
+            margin: 10px 0;
+            overflow: hidden;
+            color: lawngreen;
+        }
+
+        .skillcontainer .skills {
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            white-space: nowrap;
+        }
+
+        .home .twolines p {
+            overflow-y: hidden;
+        }
+
+        .home .twolines p span {
+            display: inline-block;
+        }
+
+        .home .twolines>p {
+            word-spacing: 2px;
+        }
+
+        /*========== about  ====*/
+        .about {
+            padding: 20px;
+            width: 100%;
+            background-color: #151515;
+        }
+
+
+        .about .d-grid-300:nth-child(1) {
+            display: grid;
+            align-content: space-around;
+            justify-content: center;
+            word-spacing: 2px;
+            overflow-x: hidden;
+        }
+
+        .about .d-grid-300 .aboutme>p {
+            padding: 20px 40px;
+        }
+
+        .aboutme a {
+            padding: 10px 25px;
+            border: 1px solid;
+            border-radius: 6px;
+            font-weight: 500;
+            margin: 20px 40px;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s linear;
+        }
+
+        .aboutme a:hover {
+            color: royalblue;
+            box-shadow: 0 0 5px 1px;
+        }
+
+        .about a img {
+            width: 35px;
+            height: 35px;
+            margin-right: 5px;
+        }
+
+        .skewelm {
+            opacity: 0.1;
+            transform: skewX(7deg);
+            transition: all 0.5s linear;
+        }
+
+        .noskew {
+            opacity: 1;
+            transform: skewX(0deg);
+        }
+
+        .about .d-grid-300 .aboutimg img {
+            width: var(--imgWH, 300px);
+            height: var(--imgWH, 300px);
+            border-radius: 50%;
+            transition: scale 0.3s linear;
+        }
+
+        .about .aboutimg img:hover {
+            scale: 1.1;
+        }
+
+        /*=============== skill  =============*/
+        .keyskillscontainer {
+            padding: 10px 10px 0;
+        }
+
+        .myskillbefore {
+            width: 100%;
+            position: relative;
+            height: 2px;
+            background-color: rgb(0, 0, 0);
+        }
+
+        .myskillbefore p {
+            width: 0%;
+            height: 100%;
+            position: absolute;
+            transition: 0.9s ease-in-out;
+            transform-origin: center left;
+            z-index: 1;
+        }
+
+        .hundred {
+            width: 100% !important;
+            background-color: lawngreen;
+        }
+
+        .keyskillscontainer .myskill {
+            padding: 15px 10px 5px;
+            font-weight: 500;
+        }
+
+        /*======== projects  ========*/
+        #projects {
+            background-color: #ffffff0d;
+            padding: 20px;
+        }
+
+        .projectsContainer .d-flex {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+            overflow-x: hidden;
+        }
+
+        .project {
+            height: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex: 0 1 430px;
+            display: flex;
+            transition: 0.6s ease-in-out;
+        }
+
+        .projectanm {
+            opacity: 0;
+            scale: 0.7;
+        }
+
+        .noprojectanm {
+            opacity: 1;
+            scale: 1;
+        }
+
+        .project iframe,
+        .goto {
+            height: 100%;
+            min-width: 100%;
+        }
+
+        .project .goto {
+            background-color: rgb(33 33 33 / 96%);
+            backdrop-filter: blur(3px);
+            transition: all 0.3s linear;
+            transform: translateX(-100%);
+            opacity: 0;
+            z-index: 3;
+            word-spacing: 2px;
+            border: 1px dotted;
+        }
+
+        .project:hover .goto {
+            /* transform: translateX(-100%); */
+            opacity: 1;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .goto p {
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+
+        .goto a {
+            font-weight: bold;
+            filter: drop-shadow(1px 1px 3px #fff);
+            transition: 0.3s linear;
+        }
+
+        .goto a:hover {
+            filter: drop-shadow(1px 1px 6px #fff);
+        }
+
+        .goto .gotosite {
+            color: black;
+            margin-bottom: 1.5rem;
+            padding: 10px 30px;
+            justify-content: space-evenly;
+        }
+
+        .gotosite img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /*========== contact  ==========*/
+        #contact {
+            padding: 20px;
+        }
+
+        #contact .d-grid-300 a,
+        #contact .d-grid-300 .connectlink a {
+            border: 1px solid rgb(85, 26, 139);
+            border-radius: 10px;
+            padding: 25px 15px;
+            color: white;
+            overflow: hidden;
+            position: relative;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 5px 1px rgb(85, 26, 139);
+        }
+
+        #contact .d-grid-300:nth-child(2) a:hover,
+        #contact .d-grid-300:nth-child(2) a:hover .before {
+            scale: 1;
+            opacity: 1;
+            color: black;
+        }
+
+
+        .contactme .d-grid-300:nth-child(2) a .before {
+            content: '';
+            position: absolute;
+            transition: 0.3s linear;
+            background-color: white;
+            inset: 0;
+            scale: 0;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        #contact .d-grid-300 a img {
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            border-radius: 20%;
+        }
+
+        #contact .d-grid-300 .connectlink .before {
+            content: '';
+            position: absolute;
+            background: rgb(85 26 139 / 35%);
+            inset: 0;
+            z-index: 0;
+            transform: translateY(-100%);
+        }
+
+        /* something happend that i disable to solve  thats why i use this */
+        #contact span,
+        img {
+            z-index: 1;
+        }
+
+        .connectlink a:hover .before {
+            transform: translateY(0%) !important;
+            transition: 0.2s linear;
+        }
+
+        .contactme .numbercopy {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .contactme .numbercopy img {
+            width: 50px;
+            height: 50px;
+        }
+
+        /*================ copy to clipboard ================*/
+        .copytext {
+            position: fixed;
+            bottom: 10%;
+            left: 50%;
+            font-weight: bold;
+            transform: translate(-50%, -50%);
+            background-color: #80808094;
+            color: #ffffff;
+            display: none;
+            padding: 10px 15px;
+            font-size: 15px;
+            border-radius: 4px;
+            z-index: 5;
+            backdrop-filter: blur(15px);
+        }
+
+        .bluriff {
+            backdrop-filter: blur(2px);
+            position: fixed;
+            height: 100%;
+            overflow: hidden;
+            top: 0px;
+            left: 0;
+            width: 100%;
+            z-index: -3;
+        }
+
+        .zIndex {
+            z-index: 4;
+        }
+
+        @media screen and (min-width:1000px) {
+            .name {
+                font-size: 2.4rem;
+            }
+
+            #contact .d-grid-300 a {
+                margin: 2rem;
+            }
+
+            nav .hamburger {
+                padding: 0 10px;
+            }
+
+        }
+
+        @media (min-width:650px) {}
+
+        @media screen and (max-width:650px) {
+            .name {
+                font-size: 1.8rem;
+            }
+
+        }
+
+        @media screen and (max-width:450px) {
+            .name {
+                font-size: 1.4rem;
+            }
+
+            .about .d-grid-300 .aboutimg img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .about .d-grid-300 .aboutme>p {
+                padding: 20px 22px;
+            }
+
+            .about .d-grid-300 .aboutme>a {
+                margin: 20px 22px;
+            }
+
+            .d-grid-300 {
+                grid-template-columns: repeat(auto-fit, minmax(var(--gridWidth, 260px), 1fr));
+            }
+
+            .myskillbefore p {
+                transition: 0.4s ease-in-out;
+            }
+
+            .project {
+                transition: 0.4s ease-in-out;
+            }
+
+            #contact .d-grid-300 a img {
+                width: 30px;
+                height: 30px;
+            }
+
+            #contact .d-grid-300 a,
+            #contact .d-grid-300 .connectlink a {
+                padding: 20px 15px;
+            }
+
+            .contactme .numbercopy {
+                width: 70px;
+                height: 70px;
+            }
+
+            .contactme .numbercopy img {
+                width: 40px;
+                height: 40px;
+            }
+
+        }
+
+        @media screen and (max-width:350px) {
+            nav .img {
+                width: 51px;
+                height: 51px;
+            }
+
+            .name {
+                font-size: 1.3rem;
+            }
+
+            #projects,
+            #contact {
+                padding: 20px 10px;
+            }
+        }
+
+        @media screen and (max-width:280px) {
+            nav .img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .name {
+                font-size: 1rem;
+            }
+
+            nav .hamburger {
+                font-size: 1.7rem;
+            }
+
+            #home,
+            #about {
+                padding: 20px 10px;
+            }
+
+            .d-grid-300 {
+                grid-template-columns: repeat(auto-fit, minmax(var(--gridWidth, 240px), 1fr));
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <!--================ shree gadeshayy.. namah........... ================-->
+    <!--================ navbar  ==================-->
+    <nav class="d-flexSB">
+        <div class="img">
+            <div class="before"></div>
+            <img src="my photo2.jpg" alt="profile" class="profile">
+        </div>
+        <h2 class="name">ayush nagar</h2>
+        <h2 class="hamburger">
+            <span class="hamburgeroff">&#9635;</span>
+            <span class="hamburgeron d-none">&#9632;</span>
+        </h2>
+        <div class="bookmarks d-none pd-10">
+            <div class="bookmark pd-10">
+                <a href="#home"></a>
+                <a href="#home">home</a>
+            </div>
+            <div class="bookmark pd-10">
+                <a href="#about"></a>
+                <a href="#about">about me</a>
+            </div>
+            <div class="bookmark pd-10">
+                <a href="#projects"></a>
+                <a href="#projects">projects</a>
+            </div>
+            <div class="bookmark pd-10">
+                <a href="#contact"></a>
+                <a href="#contact">contact</a>
+            </div>
+        </div>
+    </nav>
+    <main id="main">
+        <!--================ starting animated loader  ==================-->
+        <div class="loaderpage  d-grid-sb  text-center">
+            <!--======== first page  =========-->
+            <div class="loaderupper pd-10">
+                <h4>
+                    <span class="parent">
+                        <span class="child">ayush</span>
+                        <span class="child child-last-child">portfolio</span>
+                        <span class="child child-last-child">2023</span>
+                    </span>
+                </h4>
+            </div>
+            <div class="loadermiddle pd-10">
+                <h2>
+                    <span class="parent">
+                        <span class="child">ayush</span>
+                        <span class="child">nagar</span>
+                        <span class="child child-last-child">is</span>
+                        <span class="child child-last-child">a</span>
+                    </span>
+                </h2>
+            </div>
+            <div class="loaderdown pd-10 parent">
+                <div class="loader child"></div>
+            </div>
+            <div class="green"></div>
+        </div>
+
+
+
+
+        <!--============== home  ================-->
+        <section class="home text-center" id="home">
+            <h1 class="pd-10">A PASSIONATE</h1>
+            <h1 class="pd-10">AND SKILLED</h1>
+            <div class="skillcontainer">
+                <h2 class="skills" id="skill-1"><span>FRONT-END DEVELOPER</span></h2>
+                <h2 class="skills" id="skill-2"><span>UI DEVELOPER</span></h2>
+                <h2 class="skills" id="skill-3"><span>CODER</span></h2>
+            </div>
+            <div class="twolines d-grid-300 pd-10 m-10 text-center">
+                <p class="line1 pd-10"><span>open for skill-growth internship.</span></p>
+                <p class="line2 pd-10"><span>Passionate about Improving Web Expertise.</span></p>
+            </div>
+        </section>
+
+        <!--============== about  ================-->
+        <section class="about" id="about">
+            <div class="d-grid-300 py-1rem gap1">
+                <div class="aboutme skewelm">
+                    <p class="gray heading">about me</p>
+                    <p> I am Ayush Nagar, a self-taught UI and front-end developer hailing from Bhopal, Madhya
+                        Pradesh,
+                        My specialties lie in crafting visually captivating and responsive websites, driven by
+                        CSS
+                        and JavaScript. With a year of dedicated learning behind me, I am now brimming with
+                        confidence
+                        in my
+                        front-end development skills.</p>
+                    <a href="ayushnagar.pdf" download="">
+                        <img src="file.png" alt="download logo"> <span>resume</span>
+                    </a>
+                </div>
+                <div class="aboutimg dgridCenter">
+                    <img src="my photo2.jpg" alt="myPhoto">
+                </div>
+            </div>
+            <!--=========== skills ===========-->
+            <div class="keyskills py-1rem">
+                <p class="gray heading">skills</p>
+                <div class="keyskillscontainer skewelm">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill">html</h4>
+                </div>
+                <div class="keyskillscontainer skewelm">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill">css</h4>
+                </div>
+                <div class="keyskillscontainer skewelm">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill">JavaScript</h4>
+                </div>
+                <div class="keyskillscontainer skewelm">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill">bootstrap</h4>
+                </div>
+                <div class="keyskillscontainer skewelm">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill">git and github</h4>
+                </div>
+                <div class="keyskillscontainer skewelm">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill">responsive design for all devices</h4>
+                </div>
+                <div class="keyskillscontainer skewelm">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill">basic gsap</h4>
+                </div>
+                <div class="keyskillscontainer skewelm">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill"></h4>
+                </div>
+            </div>
+        </section>
+
+        <!--============ projects  ==============-->
+        <section id="projects">
+            <p class="gray pd-10 heading">recent projects</p>
+            <div class="projectsContainer py-1rem">
+                <h4 class="text-center">goto sites for better experience</h4>
+                <div class="d-flex">
+                    <div class="project projectanm">
+                        <iframe src="https://ayush7704.github.io/site-for-solar-solutions" frameborder="0"></iframe>
+                        <div class="goto">
+                            <p class="text-center">a site for sunshine solar solutions</p>
+                            <div class="gotosite d-flexAJ">
+                                <a href="https://ayush7704.github.io/site-for-solar-solutions">see site...</a>
+                                <a href="https://ayush7704.github.io/site-for-solar-solutions"><img src="up-arrow.png"
+                                        alt="arrow"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project projectanm">
+                        <iframe src="https://ayushagecalculator.netlify.app" frameborder="0"></iframe>
+                        <div class="goto">
+                            <p class="text-center">a age calculator that shows the current and upcoming birthday days
+                            </p>
+                            <div class="gotosite d-flexAJ">
+                                <a href="https://ayushagecalculator.netlify.app">see site...</a>
+                                <a href="https://ayushagecalculator.netlify.app"><img src="up-arrow.png"
+                                        alt="arrow"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="project projectanm">
+                        <iframe src="https://ayushnagar.netlify.app" frameborder="0"></iframe>
+                        <div class="goto">
+                            <p class="text-center">landing page for an it company of bhopal</p>
+                            <div class="gotosite d-flexAJ">
+                                <a href="https://ayushnagar.netlify.app">see site...</a>
+                                <a href="https://ayushnagar.netlify.app"><img src="up-arrow.png" alt="arrow"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="project projectanm">
+                        <iframe src="https://ayushwordcounter.netlify.app" frameborder="0"></iframe>
+                        <div class="goto">
+                            <p class="text-center">a word counter that show the characters and words length</p>
+                            <div class="gotosite d-flexAJ">
+                                <a href="https://ayushwordcounter.netlify.app">see site...</a>
+                                <a href="https://ayushwordcounter.netlify.app"><img src="up-arrow.png" alt="arrow"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project projectanm">
+                        <iframe src="https://ayushnagar-oldportfolio.netlify.app" frameborder="0"></iframe>
+                        <div class="goto">
+                            <p class="text-center">my old portfolio </p>
+                            <div class="gotosite d-flexAJ">
+                                <a href="https://ayushnagar-oldportfolio.netlify.app">see site...</a>
+                                <a href="https://ayushnagar-oldportfolio.netlify.app"><img src="up-arrow.png"
+                                        alt="arrow"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--================ contact  ================-->
+        <section id="contact">
+            <p class="gray pd-10 heading">connect to me</p>
+            <div class="contactme py-1rem">
+                <h1 class="text-center pd-10">let's connect</h1>
+                <div class="d-grid-300 gap1 py-1rem">
+                    <a href="https://wa.me/919754742477" class="text-center d-flexAJ">
+                        <div class="before"></div><span>write a message</span>
+                        <img src="whatsapp.png" alt="whatsapp logo">
+                    </a>
+                    <a href="mailto:nagarayush570@gmail.com" class="text-center d-flexAJ">
+                        <div class="before"></div><span>write a message</span>
+                        <img src="gmail.png" alt="gmail logo">
+                    </a>
+                </div>
+                <div class="dgridCenter">
+                    <div class="numbercopy dgridCenter">
+                        <img src="phone-call.png" alt="call">
+                    </div>
+                </div>
+                <div class="connectlinks d-grid-300 gap1 py-1rem">
+                    <div class="connectlink">
+                        <a href="https://github.com/ayush7704" class="d-flexSB">
+                            <div class="before"></div>
+                            <span>github</span>
+                            <img src="github.png" alt="github logo">
+                        </a>
+                    </div>
+                    <div class="connectlink">
+                        <a href="https://linkedin.com/in/ayush-nagar-front-end" class="d-flexSB">
+                            <div class="before"></div>
+                            <span>LinkedIn</span>
+                            <img src="linkedin.png" alt="github logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="copytext">Number Copied</div>
+        <div class="bluriff"></div>
+    </main>
+
+    <!--============= gsap  =============-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!--============= scrollTriger  =============-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script>
+
+        let timeline = gsap.timeline()
+
+        timeline.to('.loadermiddle .parent .child', {
+            transform: 'translateX(0%)',
+            ease: Power3.easeInOUT,
+            opacity: 1,
+            color: 'white',
+            stagger: 0.3,
+            onStart: () => { gsap.to('body', { overflow: 'hidden' }) },
+        })
+
+        console.log('load')
+        window.addEventListener('load', () => {
+            console.log('loaded')
+            timeline.to('.child', {
+                transform: 'translateY(-100%)',
+                ease: Power3.easeInOUT,
+                duration: 0.3,
+                delay: 0.5,
+            }).to('main .loaderpage', {
+                height: 0,
+                duration: 0.5,
+                delay: 0.2,
+                ease: Power3.easeInOUT,
+                onStart: () => { gsap.to('.parent', { display: 'none', duration: 0 }) },
+            }).to('main .green', {
+                height: 0,
+                duration: 1,
+                delay: '-0.1',
+                ease: 'expo',
+                onComplete: () => {
+                    gsap.to('main .loaderpage', { display: 'none' })
+                }
+            }).from('.img .before', {
+                animation: 'rotate 0.2s linear infinite',
+                duration: 0.3
+            }).to('.name', {
+                duration: 0.8,
+                webkitTextStroke: 1 + 'px white'
+            }).from('.hamburger', {
+                scale: 0,
+                ease: Power4,
+                duration: 0.5,
+                onComplete: () => {
+                    gsap.to('body', { overflow: 'auto' })
+                    // gsap.fromTo('.twolines p', { fontWeight: 'bold', scale: 1.1,yoyo: true  }, { duration: 1.3, stagger: 1.3, fontWeight: '400', scale: 1,})
+                }
+            }).from('.home h1', {
+                transform: 'rotateX(-90deg)',
+                duration: 0.3,
+                stagger: 0.3
+            }).fromTo('.skills',
+                { y: '60%', duration: 0, ease: Power3 }, { y: '-160%', duration: 4.2, repeatDelay: -1.6, ease: Power3, stagger: 2.1, repeat: -1 },
+            ).from('.twolines p span', {
+                y: '150%',
+                // dispaly:'block',
+                duration: 1,
+                ease: Power4,
+                delay: '-8'
+            }).from('.aboutimg img', {
+                x: '-30%',
+                duration: 0.5,
+                scrollTrigger: {
+                    trigger: '.aboutimg img',
+                    scroller: 'body',
+                    start: 'top 90%',
+                    end: 'top 70%',
+                    scrub: 2,
+                    webkitFilter: "blur" + 2 + "px)",
+                }
+            }).from('#projects', {
+                backgroundColor: '#151515',
+                duration: 0.6,
+                ease: Power1,
+                scrollTrigger: {
+                    trigger: '#projects',
+                    scroller: 'body',
+                    start: 'top 80%',
+                    end: 'top 80%',
+                    scrub: 3,
+                    // markers:true
+                }
+            })
+        })
+
+
+
+        //===== hamburgur 
+        document.querySelector('.hamburger').addEventListener('click', (event) => {
+
+            let bookmarks = document.querySelector('.bookmarks')
+            let off = document.querySelector('.hamburgeroff');
+            let on = document.querySelector('.hamburgeron')
+            let blur = document.querySelector('.bluriff')
+
+            function sidebar() {
+                on.classList.toggle('d-none')
+                off.classList.toggle('d-none')
+                bookmarks.classList.toggle('d-none')
+                blur.classList.toggle('zIndex')
+                console.log('sideinter')
+            }
+
+            if (on.classList.contains('d-none')) {
+                sidebar()
+                let intm = gsap.timeline()
+                intm.from('.bookmark', {
+                    x: '-70%',
+                    duration: 0.1,
+                    stagger: 0.1,
+                    ease: 'none'
+                })
+                    .from('.bookmark', {
+                        rotate: '0deg',
+                        duration: 0.5,
+                        ease: 'none'
+                    })
+                console.log('pass')
+            }
+
+            else {
+                sidebar()
+            }
+            function bookandblur() {
+                on.classList.add('d-none')
+                off.classList.remove('d-none')
+                bookmarks.classList.add('d-none')
+                blur.classList.remove('zIndex')
+                console.log('clicked')
+            }
+            document.querySelectorAll('.bookmark').forEach((elm) => {
+                elm.addEventListener('click', (e) => {
+                    bookandblur()
+                })
+                document.querySelector('.bluriff').style.cssText = ''
+            })
+            document.querySelector('.bluriff').addEventListener('click', () => {
+                bookandblur()
+                console.log('onsblur')
+            })
+        })
+
+
+        //=========== on resize 
+        window.addEventListener('DOMContentLoaded', () => {
+            let body = document.body;
+            document.documentElement.style.setProperty('--navheight', document.querySelector('nav').offsetHeight + 'px')
+
+            document.documentElement.style.setProperty('--scrolltop', document.querySelector('nav').offsetHeight + 'px')
+
+            function setproperty() {
+                if (body.offsetWidth <= '300') {
+                    document.documentElement.style.setProperty('--gridWidth', body.offsetWidth - 60 + 'px')
+                    document.documentElement.style.setProperty('--navheight', document.querySelector('nav').offsetHeight + 'px')
+                    document.documentElement.style.setProperty('--scrolltop', document.querySelector('nav').offsetHeight + 'px')
+                    console.log('aagya')
+                    // we minused the padd off the element here for better results
+                    document.querySelector('.aboutimg img').style.cssText = `width:${body.offsetWidth - 60 + 'px'};height:${body.offsetWidth - 60 + 'px'}`
+                }
+                else {
+
+                    document.querySelector('.aboutimg img').style.cssText = ''
+                }
+            }
+            setproperty()
+            window.addEventListener('resize', () => {
+                setproperty()
+            })
+        })
+
+        // skill lines animation 
+        const skillcontainer = document.querySelectorAll('.keyskillscontainer');
+        const skew = document.querySelectorAll('.skewelm');
+        const projects = document.querySelectorAll('.project');
+        const headings = document.querySelectorAll('.heading');
+        // headings.forEach((h) => {
+        //     gsap.from(h, {
+        //         x: '-30%',
+        //         opacity: 0,
+        //         // opacity:0,
+        //         duration: 0.3,
+        //         scrollTrigger: {
+        //             trigger: h,
+        //             start: 'top 80%',
+        //         }
+        //     })
+        // })
+
+        let observer = new IntersectionObserver((events) => {
+            events.forEach((e) => {
+
+                if (e.target.classList.contains('skewelm') && e.target.classList.contains('keyskillscontainer')) {
+                    e.target.children[0].children[0].classList.toggle('hundred', e.isIntersecting)
+                    e.target.classList.toggle('noskew', e.isIntersecting)
+                }
+                else if (e.target.classList.contains('keyskillscontainer')) {
+                    e.target.children[0].children[0].classList.toggle('hundred', e.isIntersecting)
+                }
+                else if (e.target.classList.contains('skewelm')) {
+                    e.target.classList.toggle('noskew', e.isIntersecting)
+                }
+                else if (e.target.classList.contains('project')) {
+                    e.target.classList.toggle('noprojectanm', e.isIntersecting)
+                    console.log('in')
+                }
+
+            })
+        }, {
+            threshold: 0.3
+        })
+        skillcontainer.forEach((s) => {
+            observer.observe(s)
+        })
+        skew.forEach((s) => {
+            observer.observe(s)
+        })
+        projects.forEach((p) => { observer.observe(p) })
+        // headings.forEach((h) => { observer.observe(h) })
+
+        let color = ['springgreen', 'dodgerblue', 'gold', 'lawngreen', 'royalblue', 'violet']
+        let colornum = 0;
+        setInterval(() => {
+            gsap.to('.numbercopy', {
+                boxShadow: `0 0 7px 2px ${color[colornum]}`,
+                duration: 0.6,
+            })
+            colornum++
+            if (colornum == color.length) {
+                colornum = 0
+            }
+        }, 600)
+
+        //======== number copy 
+        document.querySelector('.numbercopy').addEventListener('click', () => {
+            navigator.clipboard.writeText(9754742477)
+            navigator.vibrate([100, 100, 100])
+            setTimeout(() => {
+                document.querySelector('.copytext').style.display = 'block'
+            }, 100)
+            setTimeout(() => {
+                document.querySelector('.copytext').style.display = 'none'
+            }, 1000)
+        })
+    </script>
+</body>
+
+</html>
