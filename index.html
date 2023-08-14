@@ -123,6 +123,7 @@
 
         .slide {
             opacity: 0;
+            transition: all 0.4s linear;
             transform: translateX(-30%);
         }
 
@@ -221,6 +222,9 @@
             border-radius: 50%;
             position: relative;
             overflow: hidden;
+        }
+        .profile{
+            cursor: pointer;
         }
 
         nav .img .before {
@@ -461,7 +465,7 @@
             width: var(--imgWH, 300px);
             height: var(--imgWH, 300px);
             border-radius: 50%;
-            transition: scale 0.3s linear;
+            transition: all 0.3s linear;
         }
 
         .about .aboutimg img:hover {
@@ -695,6 +699,32 @@
             z-index: 4;
         }
 
+        .myphoto {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            backdrop-filter: blur(2px);
+        }
+
+        .myphotocontainer {
+            position: relative;
+        }
+
+        .myphoto img {
+            width: var(--myphoto, 400px);
+            height: var(--myphoto, 400px);
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .myphoto .remove {
+            font-size: 1.6rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+
         @media screen and (min-width:1000px) {
             .name {
                 font-size: 2.4rem;
@@ -769,6 +799,11 @@
                 height: 40px;
             }
 
+            .myphoto img {
+                width: var(--myphoto, 300px);
+                height: var(--myphoto, 300px);
+            }
+
         }
 
         @media screen and (max-width:350px) {
@@ -784,6 +819,11 @@
             #projects,
             #contact {
                 padding: 20px 10px;
+            }
+
+            .myphoto img {
+                width: var(--myphoto, 250px);
+                height: var(--myphoto, 250px);
             }
         }
 
@@ -808,6 +848,11 @@
 
             .d-grid-300 {
                 grid-template-columns: repeat(auto-fit, minmax(var(--gridWidth, 240px), 1fr));
+            }
+
+            .myphoto img {
+                width: var(--myphoto, 210px);
+                height: var(--myphoto, 210px);
             }
 
         }
@@ -897,7 +942,7 @@
         <section class="about" id="about">
             <div class="d-grid-300 py-1rem gap1">
                 <div class="aboutme skewelm">
-                    <p class="gray heading">about me</p>
+                    <p class="gray heading slide">about me</p>
                     <p> I am Ayush Nagar, a self-taught UI and front-end developer hailing from Bhopal, Madhya
                         Pradesh,
                         My specialties lie in crafting visually captivating and responsive websites, driven by
@@ -911,12 +956,12 @@
                     </a>
                 </div>
                 <div class="aboutimg dgridCenter">
-                    <img src="my photo2.jpg" alt="myPhoto">
+                    <img src="my photo2.jpg" alt="myPhoto" class="slide profile">
                 </div>
             </div>
             <!--=========== skills ===========-->
             <div class="keyskills py-1rem">
-                <p class="gray heading">skills</p>
+                <p class="gray heading slide">skills</p>
                 <div class="keyskillscontainer skewelm">
                     <div class="myskillbefore my-10">
                         <p></p>
@@ -970,7 +1015,7 @@
 
         <!--============ projects  ==============-->
         <section id="projects">
-            <p class="gray pd-10 heading">recent projects</p>
+            <p class="gray pd-10 heading slide">recent projects</p>
             <div class="projectsContainer py-1rem">
                 <h4 class="text-center">goto sites for better experience</h4>
                 <div class="d-flex">
@@ -1038,7 +1083,7 @@
 
         <!--================ contact  ================-->
         <section id="contact">
-            <p class="gray pd-10 heading">connect to me</p>
+            <p class="gray pd-10 heading slide">connect to me</p>
             <div class="contactme py-1rem">
                 <h1 class="text-center pd-10">let's connect</h1>
                 <div class="d-grid-300 gap1 py-1rem">
@@ -1076,6 +1121,12 @@
         </section>
         <div class="copytext">Number Copied</div>
         <div class="bluriff"></div>
+        <div class="myphoto dgridCenter">
+            <div class="myphotocontainer">
+                <h3 class="remove">&#10062;</h3>
+                <img src="my photo.jpg" alt="">
+            </div>
+        </div>
     </main>
 
     <!--============= gsap  =============-->
@@ -1085,6 +1136,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- <script src="script.js"></script> -->
     <script>
+        // gsap.registerPlugin(scrollTrigger)
 
         let timeline = gsap.timeline()
 
@@ -1145,17 +1197,6 @@
                 duration: 1,
                 ease: Power4,
                 delay: '-8'
-            }).from('.aboutimg img', {
-                x: '-30%',
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: '.aboutimg img',
-                    scroller: 'body',
-                    start: 'top 90%',
-                    end: 'top 70%',
-                    scrub: 2,
-                    webkitFilter: "blur" + 2 + "px)",
-                }
             }).from('#projects', {
                 backgroundColor: '#151515',
                 duration: 0.6,
@@ -1228,6 +1269,20 @@
             })
         })
 
+        // profile pic open 
+        const profiletm = gsap.timeline()
+        document.querySelectorAll('.profile').forEach((pic) => {
+            pic.addEventListener('click', () => {
+                profiletm.to('.myphoto', {
+                    zIndex: 6,
+                    duration: 0.5
+                })
+            })
+        })
+        document.querySelector('.remove').addEventListener('click', () => {
+            document.querySelector('.myphoto').style.cssText = 'z-index:-2'
+        })
+
 
         //=========== on resize 
         window.addEventListener('DOMContentLoaded', () => {
@@ -1260,19 +1315,6 @@
         const skillcontainer = document.querySelectorAll('.keyskillscontainer');
         const skew = document.querySelectorAll('.skewelm');
         const projects = document.querySelectorAll('.project');
-        const headings = document.querySelectorAll('.heading');
-        // headings.forEach((h) => {
-        //     gsap.from(h, {
-        //         x: '-30%',
-        //         opacity: 0,
-        //         // opacity:0,
-        //         duration: 0.3,
-        //         scrollTrigger: {
-        //             trigger: h,
-        //             start: 'top 80%',
-        //         }
-        //     })
-        // })
 
         let observer = new IntersectionObserver((events) => {
             events.forEach((e) => {
@@ -1303,7 +1345,20 @@
             observer.observe(s)
         })
         projects.forEach((p) => { observer.observe(p) })
-        // headings.forEach((h) => { observer.observe(h) })
+
+        const slideshow = document.querySelectorAll('.slide');
+        const obserber2 = new IntersectionObserver((slides) => {
+            slides.forEach((slide) => {
+                slide.target.classList.toggle('noslide', slide.isIntersecting)
+
+            })
+        }, {
+            threshold: 0.3
+        })
+        slideshow.forEach((slide) => {
+            obserber2.observe(slide)
+        })
+
 
         let color = ['springgreen', 'dodgerblue', 'gold', 'lawngreen', 'royalblue', 'violet']
         let colornum = 0;
