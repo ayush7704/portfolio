@@ -704,6 +704,7 @@
             position: fixed;
             inset: 0;
             z-index: -2;
+            opacity: 0;
             backdrop-filter: blur(2px);
         }
 
@@ -952,8 +953,8 @@
                 <h2 class="skills" id="skill-3"><span>CODER</span></h2>
             </div>
             <div class="twolines d-grid-300 pd-10 m-10 text-center">
-                <p class="line1 pd-10"><span>open for skill-growth internship.</span></p>
-                <p class="line2 pd-10"><span>Passionate about Improving Web Expertise.</span></p>
+                <p class="line1 pd-10"><span>Open For Skill-growth Internship.</span></p>
+                <p class="line2 pd-10"><span>Serious about Improving Web Expertise.</span></p>
             </div>
         </section>
 
@@ -970,7 +971,7 @@
                         confidence
                         in my
                         front-end development skills.</p>
-                    <a href="ayushnagar.pdf" download="">
+                    <a href="ayushNagar.pdf" download="">
                         <img src="file.png" alt="download logo"> <span>resume</span>
                     </a>
                 </div>
@@ -1138,11 +1139,18 @@
                 </div>
             </div>
         </section>
+        <!--========= number copied  ==========-->
         <div class="copytext">Number Copied</div>
+
+        <!--============= goup  ===========-->
         <div class="goupcontainer d-none">
             <a href="#home" class="goup">&#8593;</a>
         </div>
+
+        <!--=========== blureffect  ==========-->
         <div class="bluriff"></div>
+
+        <!--============ profile photo  ==========-->
         <div class="myphoto dgridCenter">
             <div class="myphotocontainer">
                 <h3 class="remove">&#10062;</h3>
@@ -1178,10 +1186,10 @@
                 transform: 'translateY(-100%)',
                 ease: Power3.easeInOUT,
                 duration: 0.3,
-                delay: 0.5,
+                delay: 0.3,
             }).to('main .loaderpage', {
                 height: 0,
-                duration: 0.5,
+                duration: 0.4,
                 delay: 0.2,
                 ease: Power3.easeInOUT,
                 onStart: () => { gsap.to('.parent', { display: 'none', duration: 0 }) },
@@ -1197,12 +1205,12 @@
                 animation: 'rotate 0.2s linear infinite',
                 duration: 0.3
             }).to('.name', {
-                duration: 0.8,
+                duration: 0.5,
                 webkitTextStroke: 1 + 'px white'
             }).from('.hamburger', {
                 scale: 0,
                 ease: Power4,
-                duration: 0.5,
+                duration: 0.3,
                 onComplete: () => {
                     gsap.to('body', { overflow: 'auto' })
                     // gsap.fromTo('.twolines p', { fontWeight: 'bold', scale: 1.1,yoyo: true  }, { duration: 1.3, stagger: 1.3, fontWeight: '400', scale: 1,})
@@ -1297,7 +1305,8 @@
             pic.addEventListener('click', () => {
                 profiletm.to('.myphoto', {
                     zIndex: 6,
-                    duration: 0.5
+                    duration: 0.5,
+                    opacity: 1
                 })
             })
         })
@@ -1375,7 +1384,6 @@
         const obserber2 = new IntersectionObserver((slides) => {
             slides.forEach((slide) => {
                 slide.target.classList.toggle('noslide', slide.isIntersecting)
-
             })
         }, {
             threshold: 0.3
