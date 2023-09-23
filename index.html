@@ -223,7 +223,8 @@
             position: relative;
             overflow: hidden;
         }
-        .profile{
+
+        .profile {
             cursor: pointer;
         }
 
@@ -473,8 +474,27 @@
         }
 
         /*=============== skill  =============*/
+        .keyskills {
+            overflow-x: hidden;
+        }
+
         .keyskillscontainer {
             padding: 10px 10px 0;
+            position: relative;
+        }
+
+        .keyskillscontainer img {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            object-position: center;
+            top: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: all linear 0.2s;
+            border-radius: 50%;
+            transform: translate(-50%);
         }
 
         .myskillbefore {
@@ -488,7 +508,7 @@
             width: 0%;
             height: 100%;
             position: absolute;
-            transition: 0.9s ease-in-out;
+            transition: 0.4s linear;
             transform-origin: center left;
             z-index: 1;
         }
@@ -501,6 +521,8 @@
         .keyskillscontainer .myskill {
             padding: 15px 10px 5px;
             font-weight: 500;
+            color: white;
+            mix-blend-mode: difference;
         }
 
         /*======== projects  ========*/
@@ -726,8 +748,8 @@
             right: 0;
             cursor: pointer;
         }
-        
-        .goupcontainer{
+
+        .goupcontainer {
             position: fixed;
             bottom: 2%;
             width: 50px;
@@ -737,7 +759,8 @@
             border-radius: 50%;
             right: 2%;
         }
-        .goup{
+
+        .goup {
             position: absolute;
             inset: 0;
             text-align: center;
@@ -982,49 +1005,62 @@
             <!--=========== skills ===========-->
             <div class="keyskills py-1rem">
                 <p class="gray heading slide">skills</p>
-                <div class="keyskillscontainer skewelm">
+                <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
                     <h4 class="myskill">html</h4>
+                    <img src="https://img.freepik.com/free-vector/illustration-web-design_53876-5835.jpg?w=360&t=st=1695015765~exp=1695016365~hmac=dd2115458a7eb816a3797134bcd8af06de9910e738ee5ae9511fe4fe56869e88"
+                        alt="html img">
                 </div>
-                <div class="keyskillscontainer skewelm">
+                <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
                     <h4 class="myskill">css</h4>
+                    <img src="https://img.freepik.com/premium-psd/3d-file-format-icon-illustration-render_148391-7704.jpg?size=626&ext=jpg&ga=GA1.1.1522473138.1690536981&semt=ais"
+                        alt="css img">
                 </div>
-                <div class="keyskillscontainer skewelm">
+                <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
                     <h4 class="myskill">JavaScript</h4>
+                    <img src="https://img.freepik.com/premium-vector/computer-design-blue-background-vector-illustration_24908-44354.jpg?size=626&ext=jpg&ga=GA1.1.1522473138.1690536981&semt=ais"
+                        alt="js logo">
                 </div>
-                <div class="keyskillscontainer skewelm">
+                <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
                     <h4 class="myskill">bootstrap</h4>
+                    <img src="https://img.freepik.com/premium-vector/bootstrap-flat-logo-vector-illustration_582637-461.jpg?w=740"
+                        alt="bootstrap img">
                 </div>
-                <div class="keyskillscontainer skewelm">
+                <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
                     <h4 class="myskill">git and github</h4>
+                    <img src="https://miro.medium.com/v2/resize:fit:1200/1*ve-E-lXoo8D7uDYok4VYAA.png"
+                        alt="gitGithub img">
                 </div>
-                <div class="keyskillscontainer skewelm">
+                <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
                     <h4 class="myskill">responsive design for all devices</h4>
+                    <img src="https://img.freepik.com/free-vector/gradient-responsive-website-design_23-2149496034.jpg?w=740&t=st=1695020819~exp=1695021419~hmac=8f457343c7525d7b26ce6112b03ec1a5305e7b0684fac7a59a9137fa70724e90"
+                        alt="img">
                 </div>
-                <div class="keyskillscontainer skewelm">
+                <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
                     <h4 class="myskill">basic gsap</h4>
+                    <img src="https://img-b.udemycdn.com/course/750x422/4118154_ddf0.jpg" alt="gsap img">
                 </div>
-                <div class="keyskillscontainer skewelm">
+                <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
@@ -1315,8 +1351,8 @@
         })
 
 
-        
-        
+
+
         //=========== on resize 
         window.addEventListener('DOMContentLoaded', () => {
             let body = document.body;
@@ -1367,8 +1403,8 @@
                     e.target.classList.toggle('noprojectanm', e.isIntersecting)
                     console.log('in')
                 }
-                else if(e.target.classList.contains('contact')){
-                    goupcontainer.classList.toggle('d-block',e.isIntersecting)
+                else if (e.target.classList.contains('contact')) {
+                    goupcontainer.classList.toggle('d-block', e.isIntersecting)
                     console.log('hhhhhhhhhhh')
                 }
             })
@@ -1378,7 +1414,7 @@
         skillcontainer.forEach((s) => { observer.observe(s) })
         skew.forEach((s) => { observer.observe(s) })
         projects.forEach((p) => { observer.observe(p) })
-        contact.forEach((c)=>{observer.observe(c)})
+        contact.forEach((c) => { observer.observe(c) })
 
         const slideshow = document.querySelectorAll('.slide');
         const obserber2 = new IntersectionObserver((slides) => {
@@ -1417,6 +1453,19 @@
             setTimeout(() => {
                 document.querySelector('.copytext').style.display = 'none'
             }, 1000)
+        })
+
+        document.querySelectorAll('.keyskillscontainer').forEach((keyimgs) => {
+            keyimgs.addEventListener('mouseenter',(enter)=>{
+                keyimgs.childNodes[5].style.opacity='1'
+            })
+            keyimgs.addEventListener('mouseleave',(leave)=>{
+                keyimgs.childNodes[5].style.opacity='0'
+            })
+            keyimgs.addEventListener('mousemove', (img) => {
+                console.log(keyimgs.childNodes)
+                keyimgs.childNodes[5].style.left = img.x + 'px';
+            })
         })
     </script>
 </body>
