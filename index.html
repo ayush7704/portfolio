@@ -147,7 +147,7 @@
             color: white;
             text-transform: uppercase;
             z-index: 10;
-            /* display: none; */
+            /*display: none;*/
         }
 
         .loaderpage .green {
@@ -253,7 +253,7 @@
 
         .name {
             color: transparent;
-            -webkit-text-stroke: 0px white;
+            -webkit-text-stroke: 1px white;
             text-stroke: 1px white;
             text-align: center;
             -webkit-text-fill-color: black;
@@ -462,6 +462,10 @@
             transform: skewX(0deg);
         }
 
+        .aboutimg {
+            position: relative;
+        }
+
         .about .d-grid-300 .aboutimg img {
             width: var(--imgWH, 300px);
             height: var(--imgWH, 300px);
@@ -471,6 +475,36 @@
 
         .about .aboutimg img:hover {
             scale: 1.1;
+        }
+
+        .tap {
+            position: absolute;
+            transform: translate(-50%, -75%);
+            top: 75%;
+            z-index: 2;
+            left: 50%;
+            animation: tap 1s linear infinite;
+            background-color: gray;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 0 9px 2px rgb(15, 15, 15);
+        }
+
+        .tap:hover .aboutimg img {
+            scale: 1.1;
+        }
+
+        @keyframes tap {
+            0% {
+                scale: 0;
+                opacity: 1;
+            }
+
+            100% {
+                scale: 1;
+                opacity: 0;
+            }
         }
 
         /*=============== skill  =============*/
@@ -526,9 +560,26 @@
         }
 
         /*======== projects  ========*/
+
         #projects {
             background-color: #ffffff0d;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ball {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: absolute;
+            /* top: 0; */
+            /* bottom: 0; */
+            /* left: 0; */
+            /* transform: translate(-50%,-50%); */
+            opacity: 0;
+            transition: all 0.1s linear;
+            background: linear-gradient(pink, yellow);
         }
 
         .projectsContainer .d-flex {
@@ -817,7 +868,8 @@
             .myskillbefore p {
                 transition: 0.4s linear;
             }
-            .keyskillscontainer{
+
+            .keyskillscontainer {
                 padding: 10px 0 0;
             }
 
@@ -1002,6 +1054,7 @@
                     </a>
                 </div>
                 <div class="aboutimg dgridCenter">
+                    <div class="tap profile"></div>
                     <img src="my photo2.jpg" alt="myPhoto" class="slide profile">
                 </div>
             </div>
@@ -1074,6 +1127,7 @@
 
         <!--============ projects  ==============-->
         <section id="projects">
+            <!-- <div class="ball"></div> -->
             <p class="gray pd-10 heading slide">recent projects</p>
             <div class="projectsContainer py-1rem">
                 <h4 class="text-center">goto sites for better experience</h4>
@@ -1347,6 +1401,9 @@
                     duration: 0.5,
                     opacity: 1
                 })
+                let blur = document.querySelector('.myphoto').addEventListener('click', () => {
+                    document.querySelector('.myphoto').style.cssText = 'z-index:-2'
+                })
             })
         })
         document.querySelector('.remove').addEventListener('click', () => {
@@ -1458,18 +1515,57 @@
             }, 1000)
         })
 
+        //========= hover animation on skills 
         document.querySelectorAll('.keyskillscontainer').forEach((keyimgs) => {
             keyimgs.addEventListener('mouseenter', (enter) => {
-                keyimgs.childNodes[5].style.opacity = '1'
+                try {
+                    keyimgs.childNodes[5].style.opacity = '1';
+                }
+                catch (er) {
+                    console.log(er)
+                }
             })
             keyimgs.addEventListener('mouseleave', (leave) => {
-                keyimgs.childNodes[5].style.opacity = '0'
+                try {
+                    keyimgs.childNodes[5].style.opacity = '0'
+                }
+                catch (er) {
+                    console.log(er)
+                }
             })
             keyimgs.addEventListener('mousemove', (img) => {
-                console.log(keyimgs.childNodes)
-                keyimgs.childNodes[5].style.left = img.x + 'px';
+                // console.log(keyimgs.childNodes)
+                try {
+                    keyimgs.childNodes[5].style.left = img.x + 'px';
+                }
+                catch (er) {
+                    console.log(er)
+                }
             })
         })
+
+        function projectball() {
+            let ball = document.querySelector('.ball');
+            document.querySelector('#projects').addEventListener('mouseenter', (dets) => {
+                ball.style.opacity = '1'
+            })
+            document.querySelector('#projects').addEventListener('mouseleave', (dets) => {
+                ball.style.opacity = '0'
+            })
+            document.querySelector('#projects').addEventListener('mousemove', (pos) => {
+                ball.style.top = pos.y + 'px'
+                ball.style.left = pos.x + 'px'
+                console.log(pos.y)
+            })
+        }
+        // projectball()
+
+        // document.querySelector('.about .d-grid-300 .aboutimg img').addEventListener('mousemove', (dets) => {
+        //     console.log(document.querySelector('.about .aboutimg img'))
+        //     console.log(dets)
+        //     document.querySelector('.about .aboutimg .tap').style.left = dets.x + 'px'
+        //     document.querySelector('.about .aboutimg .tap').style.top = dets.y + 'px'
+        // })
     </script>
 </body>
 
