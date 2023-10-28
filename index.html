@@ -158,7 +158,7 @@
             background-color: greenyellow;
         }
 
-        .loaderpage .parent {
+        .loaderpage .parent:not(.loaderdown) {
             display: inline-block;
             overflow-x: hidden;
         }
@@ -187,21 +187,9 @@
             justify-self: center;
         }
 
-        .loader {
-            width: 4vh;
-            height: 4vh;
-            border-radius: 50%;
-            border: 4px solid white;
-            border-top: 4px solid transparent;
-            border-bottom: 4px solid transparent;
-            transition: all 1s linear;
-            animation: load 0.5s linear infinite;
-        }
 
-        @keyframes load {
-            100% {
-                rotate: 360deg;
-            }
+        .loaderdown img {
+            rotate: -43.5deg;
         }
 
         /* //========== nav  */
@@ -866,7 +854,7 @@
             }
 
             .myskillbefore p {
-                transition: 0.4s linear;
+                transition: 0.3s linear;
             }
 
             .keyskillscontainer {
@@ -874,7 +862,7 @@
             }
 
             .project {
-                transition: 0.4s linear;
+                transition: 0.3s linear;
             }
 
             #contact .d-grid-300 a img {
@@ -1013,7 +1001,9 @@
                 </h2>
             </div>
             <div class="loaderdown pd-10 parent">
-                <div class="loader child"></div>
+                <!-- <div class="loader child"></div> -->
+                <!-- <div class="spinner"></div> -->
+                <img src="./1476.gif" alt="gif">
             </div>
             <div class="green"></div>
         </div>
@@ -1135,11 +1125,10 @@
                     <div class="project projectanm">
                         <iframe src="https://sunshinesolutions.netlify.app" frameborder="0"></iframe>
                         <div class="goto">
-                            <p class="text-center">a site for sunshine solar solutions</p>
+                            <p class="text-center">a complete front-end site for sunshine solar solutions</p>
                             <div class="gotosite d-flexAJ">
                                 <a href="https://sunshinesolutions.netlify.app">see site...</a>
-                                <a href="https://sunshinesolutions.netlify.app"><img src="up-arrow.png"
-                                        alt="arrow"></a>
+                                <a href="https://sunshinesolutions.netlify.app"><img src="up-arrow.png" alt="arrow"></a>
                             </div>
                         </div>
                     </div>
@@ -1160,7 +1149,7 @@
                     <div class="project projectanm">
                         <iframe src="https://ayushwordcounter.netlify.app" frameborder="0"></iframe>
                         <div class="goto">
-                            <p class="text-center">a word counter that show the characters and words length</p>
+                            <p class="text-center">a word counter that count the characters and words length</p>
                             <div class="gotosite d-flexAJ">
                                 <a href="https://ayushwordcounter.netlify.app">see site...</a>
                                 <a href="https://ayushwordcounter.netlify.app"><img src="up-arrow.png" alt="arrow"></a>
@@ -1170,19 +1159,22 @@
                 </div>
                 <div class="d-flex">
                     <div class="project projectanm">
-                        <iframe src="https://ayushnagar.netlify.app" frameborder="0"></iframe>
+                        <iframe src="https://foralltech.netlify.app" frameborder="0"></iframe>
                         <div class="goto">
-                            <p class="text-center">landing page for an it company of bhopal</p>
+                            <p class="text-center">landing page for an it company of bhopal <br>
+                                Created in may 2023</p>
                             <div class="gotosite d-flexAJ">
-                                <a href="https://ayushnagar.netlify.app">see site...</a>
-                                <a href="https://ayushnagar.netlify.app"><img src="up-arrow.png" alt="arrow"></a>
+                                <a href="https://foralltech.netlify.app">see site...</a>
+                                <a href="https://foralltech.netlify.app"><img src="up-arrow.png" alt="arrow"></a>
                             </div>
                         </div>
                     </div>
                     <div class="project projectanm">
                         <iframe src="https://ayushnagar-oldportfolio.netlify.app" frameborder="0"></iframe>
                         <div class="goto">
-                            <p class="text-center">my old portfolio </p>
+                            <p class="text-center">my old portfolio <br>
+                                Created in june 2023 <br>
+                                i did not make any changes in that portfolio after completion </p>
                             <div class="gotosite d-flexAJ">
                                 <a href="https://ayushnagar-oldportfolio.netlify.app">see site...</a>
                                 <a href="https://ayushnagar-oldportfolio.netlify.app"><img src="up-arrow.png"
@@ -1238,6 +1230,8 @@
         <!--============= goup  ===========-->
         <div class="goupcontainer d-none">
             <a href="#home" class="goup">&#8593;</a>
+            <!-- <img src="./1476.gif" alt="goup"> -->
+            <!-- <img src="./1476.gif" alt="gif"> -->
         </div>
 
         <!--=========== blureffect  ==========-->
@@ -1272,7 +1266,6 @@
             onStart: () => { gsap.to('body', { overflow: 'hidden' }) },
         })
 
-        console.log('load')
         window.addEventListener('load', () => {
             console.log('loaded')
             timeline.to('.child', {
@@ -1280,6 +1273,12 @@
                 ease: Power3.easeInOUT,
                 duration: 0.3,
                 delay: 0.3,
+            }).to('.loaderpage .loaderdown img', {
+                top: '-100vh',
+                position: 'relative',
+                duration: 0.5,
+                ease: Power3.easeInOUT,
+                delay: -0.3
             }).to('main .loaderpage', {
                 height: 0,
                 duration: 0.4,
@@ -1358,13 +1357,13 @@
                 let intm = gsap.timeline()
                 intm.from('.bookmark', {
                     x: '-70%',
-                    duration: 0.1,
                     stagger: 0.1,
+                    duration: 0.2,
                     ease: 'none'
                 })
                     .from('.bookmark', {
                         rotate: '0deg',
-                        duration: 0.5,
+                        duration: 0.6,
                         ease: 'none'
                     })
                 console.log('pass')
@@ -1461,11 +1460,9 @@
                 }
                 else if (e.target.classList.contains('project')) {
                     e.target.classList.toggle('noprojectanm', e.isIntersecting)
-                    console.log('in')
                 }
                 else if (e.target.classList.contains('contact')) {
                     goupcontainer.classList.toggle('d-block', e.isIntersecting)
-                    console.log('hhhhhhhhhhh')
                 }
             })
         }, {
