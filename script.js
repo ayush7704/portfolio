@@ -73,7 +73,7 @@ window.addEventListener('load', () => {
         ease: Power1,
         scrollTrigger: {
             trigger: '#projects',
-            scroller: 'body',
+            // scroller: 'body',
             start: 'top 80%',
             end: 'top 80%',
             scrub: 3,
@@ -82,21 +82,36 @@ window.addEventListener('load', () => {
     })
 })
 
-gsap.from('.aboutme .technogiq',{
-    color:'white',
-    ease:'none',
+gsap.to('.ball',{
+    rotate:'3000deg',
     scrollTrigger:{
-        trigger:'.aboutme .technogiq',
-        start:'top 90%',
-        end:'top 60%',
+        trigger:'#projects',
+        start:'top bottom',
         scrub:3,
         // markers:true
     }
 })
 
+if (document.body.offsetWidth > '800') {
+
+    gsap.fromTo('.aboutme .technogiq', {
+        backgroundSize: '0% 100%',
+        ease: 'none',
+    }, {
+        backgroundSize: '100% 100%',
+        scrollTrigger: {
+            trigger: '#main .aboutme .technogiq',
+            start: 'top 80%',
+            end: 'top 50%',
+            scrub: 1,
+            // markers:true
+        }
+    })
+}
+
 //===== hamburgur 
 document.querySelector('.hamburger').addEventListener('click', (event) => {
-
+    event.stopPropagation()
     let bookmarks = document.querySelector('.bookmarks')
     let off = document.querySelector('.hamburgeroff');
     let on = document.querySelector('.hamburgeron')
@@ -129,6 +144,7 @@ document.querySelector('.hamburger').addEventListener('click', (event) => {
 
     else {
         sidebar()
+
     }
     function bookandblur() {
         on.classList.add('d-none')
@@ -176,7 +192,9 @@ window.addEventListener('DOMContentLoaded', () => {
     document.documentElement.style.setProperty('--navheight', document.querySelector('nav').offsetHeight + 'px')
 
     document.documentElement.style.setProperty('--scrolltop', document.querySelector('nav').offsetHeight + 'px')
+    if (body.offsetWidth <= '800') {
 
+    }
     function setproperty() {
         if (body.offsetWidth <= '300') {
             document.documentElement.style.setProperty('--gridWidth', body.offsetWidth - 60 + 'px')
@@ -200,12 +218,17 @@ window.addEventListener('DOMContentLoaded', () => {
 // intersecting observer animation 
 const skillcontainer = document.querySelectorAll('.keyskillscontainer');
 const skew = document.querySelectorAll('.skewelm');
+console.log(skew)
 const projects = document.querySelectorAll('.project');
 const contact = document.querySelectorAll('#contact')
+const technogiqspan = document.querySelectorAll('.technogiq')
 
 let observer = new IntersectionObserver((events) => {
     events.forEach((e) => {
         let goupcontainer = document.querySelector('.goupcontainer')
+        if (e.target.classList.contains('technogiq') && document.body.offsetWidth <= '700') {
+            e.target.classList.toggle('technogiq100', e.isIntersecting)
+        }
         if (e.target.classList.contains('skewelm') && e.target.classList.contains('keyskillscontainer')) {
             e.target.children[0].children[0].classList.toggle('hundred', e.isIntersecting)
             e.target.classList.toggle('noskew', e.isIntersecting)
@@ -230,6 +253,7 @@ skillcontainer.forEach((s) => { observer.observe(s) })
 skew.forEach((s) => { observer.observe(s) })
 projects.forEach((p) => { observer.observe(p) })
 contact.forEach((c) => { observer.observe(c) })
+technogiqspan.forEach((c) => { observer.observe(c) })
 
 const slideshow = document.querySelectorAll('.slide');
 const obserber2 = new IntersectionObserver((slides) => {
@@ -300,20 +324,23 @@ document.querySelectorAll('.keyskillscontainer').forEach((keyimgs) => {
 })
 
 function projectball() {
+    let projects = document.querySelector('#projects')
     let ball = document.querySelector('.ball');
-    document.querySelector('#projects').addEventListener('mouseenter', (dets) => {
+    projects.addEventListener('mouseenter', (dets) => {
         ball.style.opacity = '1'
+        ball.style.scale = '1'
     })
-    document.querySelector('#projects').addEventListener('mouseleave', (dets) => {
+    projects.addEventListener('mouseleave', (dets) => {
         ball.style.opacity = '0'
+        ball.style.scale = '0'
     })
-    document.querySelector('#projects').addEventListener('mousemove', (pos) => {
+    projects.addEventListener('mousemove', (pos) => {
         ball.style.top = pos.y + 'px'
         ball.style.left = pos.x + 'px'
-        console.log(pos.y)
     })
 }
-// projectball()
+projectball()
+
 
 // document.querySelector('.about .d-grid-300 .aboutimg img').addEventListener('mousemove', (dets) => {
 //     console.log(document.querySelector('.about .aboutimg img'))
