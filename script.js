@@ -1,5 +1,17 @@
 
-gsap.registerPlugin()
+// gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+// gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger)
+// ScrollSmoother.create({
+//     smooth: 1,
+//     effects: true,
+//   });
+
+// let smoother = ScrollSmoother.create({
+//     smooth: 2,
+//     effects: true,
+//     // normalizeScroll: true
+//   });
 
 let timeline = gsap.timeline()
 
@@ -82,12 +94,12 @@ window.addEventListener('load', () => {
     })
 })
 
-gsap.to('.ball',{
-    rotate:'3000deg',
-    scrollTrigger:{
-        trigger:'#projects',
-        start:'top bottom',
-        scrub:3,
+gsap.to('.ball', {
+    rotate: '3000deg',
+    scrollTrigger: {
+        trigger: '#projects',
+        start: 'top bottom',
+        scrub: 3,
         // markers:true
     }
 })
@@ -103,6 +115,27 @@ if (document.body.offsetWidth > '800') {
             trigger: '#main .aboutme .technogiq',
             start: 'top 80%',
             end: 'top 50%',
+            scrub: 1,
+            // markers:true
+        }
+    })
+}
+if (document.body.offsetWidth > 800) {
+
+    gsap.fromTo('.rotateX', {
+        perspective: '1px',
+        rotateX: '-8deg',
+        transition: 'none',
+        ease: 'none',
+    }, {
+        perspective: '1px',
+        rotateX: '0deg',
+        transition: 'none',
+        ease: 'none',
+        scrollTrigger: {
+            trigger: '#main .aboutme',
+            start: 'top 130%',
+            end: 'top 40%',
             scrub: 1,
             // markers:true
         }
@@ -217,8 +250,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // intersecting observer animation 
 const skillcontainer = document.querySelectorAll('.keyskillscontainer');
-const skew = document.querySelectorAll('.skewelm');
-console.log(skew)
 const projects = document.querySelectorAll('.project');
 const contact = document.querySelectorAll('#contact')
 const technogiqspan = document.querySelectorAll('.technogiq')
@@ -229,28 +260,26 @@ let observer = new IntersectionObserver((events) => {
         if (e.target.classList.contains('technogiq') && document.body.offsetWidth <= '700') {
             e.target.classList.toggle('technogiq100', e.isIntersecting)
         }
-        if (e.target.classList.contains('skewelm') && e.target.classList.contains('keyskillscontainer')) {
-            e.target.children[0].children[0].classList.toggle('hundred', e.isIntersecting)
-            e.target.classList.toggle('noskew', e.isIntersecting)
-        }
-        else if (e.target.classList.contains('keyskillscontainer')) {
+        if (e.target.classList.contains('keyskillscontainer')) {
             e.target.children[0].children[0].classList.toggle('hundred', e.isIntersecting)
         }
-        else if (e.target.classList.contains('skewelm')) {
-            e.target.classList.toggle('noskew', e.isIntersecting)
-        }
-        else if (e.target.classList.contains('project')) {
+        if (e.target.classList.contains('project')) {
             e.target.classList.toggle('noprojectanm', e.isIntersecting)
         }
-        else if (e.target.classList.contains('contact')) {
-            goupcontainer.classList.toggle('d-block', e.isIntersecting)
+        if (e.target.classList.contains('contact')) {
+            if (e.isIntersecting) {
+                gsap.fromTo('.goupcontainer', { bottom: '100%', opacity: 0 }, { bottom: '2%', opacity: 1, duration: 0.4 })
+                goupcontainer.classList.toggle('d-block')
+            }
+            else {
+                goupcontainer.classList.remove('d-block')
+            }
         }
     })
 }, {
     threshold: 0.3
 })
 skillcontainer.forEach((s) => { observer.observe(s) })
-skew.forEach((s) => { observer.observe(s) })
 projects.forEach((p) => { observer.observe(p) })
 contact.forEach((c) => { observer.observe(c) })
 technogiqspan.forEach((c) => { observer.observe(c) })
@@ -266,6 +295,23 @@ const obserber2 = new IntersectionObserver((slides) => {
 slideshow.forEach((slide) => {
     obserber2.observe(slide)
 })
+
+const skew = document.querySelectorAll('.rotateX');
+const obserber3 = new IntersectionObserver((slides) => {
+    slides.forEach((slide) => {
+        if (slide.target.classList.contains('rotateX') && document.body.offsetWidth <= '800') {
+            // let a = slide.target.previousElementSibling
+            if (slide.isIntersecting) {
+                slide.target.classList.add('norotateX')
+                observer.unobserve(slide.target);
+            }
+        }
+    })
+}, {
+    threshold: 0.5
+})
+skew.forEach((s) => { obserber3.observe(s) })
+
 
 
 //======= colorchange on call icon 
@@ -327,19 +373,69 @@ function projectball() {
     let projects = document.querySelector('#projects')
     let ball = document.querySelector('.ball');
     projects.addEventListener('mouseenter', (dets) => {
-        ball.style.opacity = '1'
-        ball.style.scale = '1'
+        gsap.to(ball,{
+            opacity:1,
+            scale:1
+        })
     })
     projects.addEventListener('mouseleave', (dets) => {
-        ball.style.opacity = '0'
-        ball.style.scale = '0'
+        gsap.to(ball,{
+            opacity:0,
+            scale:0
+        })
     })
     projects.addEventListener('mousemove', (pos) => {
-        ball.style.top = pos.y + 'px'
-        ball.style.left = pos.x + 'px'
+        gsap.to(ball,{
+            top:pos.y+'px',
+            left:pos.x+'px',
+        })
     })
 }
 projectball()
+
+function homecursor() {
+    let timeoutId;
+    let home = document.querySelector('.home')
+    let homedote = document.querySelector('.homedote');
+    home.addEventListener('mousemove', (e) => {
+        gsap.to(homedote, {
+            opacity: 1,
+            translate: '-50%,-50%',
+            scale: '1',
+            top: e.y + 'px',
+            left: e.x + 'px'
+        })
+
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            console.log("Mouse stopped moving!");
+            gsap.to(homedote, {
+                opacity: 0,
+                scale: '0',
+            })
+        }, 5000);
+    });
+
+    home.addEventListener('mouseleave', (e) => {
+        gsap.to(homedote, {
+            opacity: 0,
+            scale: '0',
+        })
+        clearTimeout(timeoutId);
+    })
+    
+    setInterval(() => {
+        let width = Math.floor(Math.random() * (100 - 50) + 50);
+        let height = Math.floor(Math.random() * (100 - 50) + 50);
+        homedote.style.width = width + 'px';
+        homedote.style.height = width + 'px';
+        homedote.style.borderTopRightRadius = `${Math.floor(Math.random() * (100 - 50) + 50)}px ${Math.floor(Math.random() * (100 - 50) + 50)}px`
+        homedote.style.borderTopLeftRadius = `${Math.floor(Math.random() * (100 - 50) + 50)}px ${Math.floor(Math.random() * (100 - 50) + 50)}px`
+        homedote.style.borderBottomRightRadius = `${Math.floor(Math.random() * (100 - 50) + 50)}px ${Math.floor(Math.random() * (100 - 50) + 50)}px`
+        homedote.style.borderBottomLeftRadius = `${Math.floor(Math.random() * (100 - 50) + 50)}px ${Math.floor(Math.random() * (100 - 50) + 50)}px`
+    }, 500)
+}
+homecursor()
 
 
 // document.querySelector('.about .d-grid-300 .aboutimg img').addEventListener('mousemove', (dets) => {

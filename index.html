@@ -47,6 +47,12 @@
             scroll-padding-top: var(--scrolltop, 80px);
         }
 
+        ::selection {
+            background: #90ff02;
+            font-weight: bold;
+            color: black;
+        }
+
         /* body::-webkit-scrollbar{
             display: none;
         } */
@@ -249,7 +255,7 @@
 
         @keyframes rotate {
             100% {
-                rotate: 360deg;
+                transform: rotate(360deg);
             }
         }
 
@@ -369,6 +375,8 @@
         .home::before {
             position: absolute;
             inset: 0;
+            height: 110%;
+            top: -10%;
             content: '';
             filter: brightness(0.7);
             z-index: -1;
@@ -376,12 +384,12 @@
         }
 
 
-        .home h1:nth-child(1) {
+        .home h1:nth-of-type(1) {
             font-size: 7vw;
             padding-bottom: 0;
         }
 
-        .home h1:nth-child(2) {
+        .home h1:nth-of-type(2) {
             margin-bottom: 10px;
             font-size: 8vw;
         }
@@ -423,6 +431,34 @@
         .home .twolines>p {
             word-spacing: 2px;
         }
+
+        .homedote {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: white;
+            transition: left 0.1s linear, top 0.1s linear, width 0.5s linear, height 0.5s linear;
+            /* transition:all 0.2s linear; */
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            transform-origin: center;
+            mix-blend-mode: overlay;
+            animation: rotate2 5s linear infinite;
+            /* border-top-left-radius:0px;
+            border-top-right-radius:0px;
+            border-bottom-left-radius:0px;
+            border-bottom-right-radius:0px; */
+        }
+
+
+        @keyframes rotate2 {
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(360deg);
+            }
+        }
+
 
         /*========== about  ====*/
         .about {
@@ -483,18 +519,18 @@
             margin-right: 5px;
         }
 
-        .skewelm {
-            opacity: 0.1;
-            transform: skewX(7deg);
-            transition: all 0.4s linear;
+        .rotateX {
+            transform: perspective(1px) rotateX(-4deg);
+            transition: all 1s linear;
+            overflow: hidden;
         }
 
-        .noskew {
-            opacity: 1;
-            transform: skewX(0deg);
+        .norotateX {
+            transform: perspective(1px) rotateX(0deg)
         }
 
-        .aboutimg {
+        .aboutimg,
+        .aboutimg>div {
             position: relative;
         }
 
@@ -556,6 +592,7 @@
             object-fit: cover;
             object-position: center;
             top: 22px;
+            left: 50%;
             z-index: -1;
             opacity: 0;
             transition: all linear 0.2s;
@@ -863,22 +900,6 @@
             font-size: 2rem;
         }
 
-        @media screen and (min-width:1000px) {
-            .name {
-                font-size: 2.4rem;
-            }
-
-            #contact .d-grid-300 a {
-                margin: 2rem;
-            }
-
-            nav .hamburger {
-                padding: 0 10px;
-            }
-
-        }
-
-        @media (min-width:650px) {}
 
         @media screen and (max-width:650px) {
             .name {
@@ -1006,6 +1027,25 @@
             }
 
         }
+
+        @media screen and (min-width:1000px) {
+            .name {
+                font-size: 2.4rem;
+            }
+
+            .home::before {
+                filter: brightness(1);
+            }
+
+            #contact .d-grid-300 a {
+                margin: 2rem;
+            }
+
+            nav .hamburger {
+                padding: 0 10px;
+            }
+
+        }
     </style>
 </head>
 
@@ -1071,8 +1111,9 @@
         </div>
         <!--============== home  ================-->
         <section class="home text-center " id="home">
-            <h1 class="pd-10">A PASSIONATE</h1>
-            <h1 class="pd-10">AND SKILLED</h1>
+            <div class="homedote"></div>
+            <h1 class="pd-10"><span>A PASSIONATE</span></h1>
+            <h1 class="pd-10"><span>AND SKILLED</span></h1>
             <div class="skillcontainer">
                 <h2 class="skills" id="skill-1"><span>FRONT-END DEVELOPER</span></h2>
                 <h2 class="skills" id="skill-2"><span>UI DEVELOPER</span></h2>
@@ -1086,9 +1127,10 @@
         <!--============== about  ================-->
         <section class="about zIndex1" id="about">
             <div class="d-grid-300 py-1rem gap1">
-                <div class="aboutme skewelm">
+                <div class="aboutme">
                     <p class="gray heading slide">about me</p>
-                    <p> I am Ayush Nagar, a self-taught UI/front-end developer hailing from Bhopal, Madhya
+                    <p class="rotateX"> I am Ayush Nagar, a self-taught UI/front-end developer hailing from Bhopal,
+                        Madhya
                         Pradesh,
                         My specialties lie in crafting visually captivating and responsive websites, driven by
                         CSS
@@ -1106,8 +1148,10 @@
                     </a>
                 </div>
                 <div class="aboutimg dgridCenter">
-                    <div class="tap profile"></div>
-                    <img src="my photo2.webp" alt="myPhoto" class="slide profile">
+                    <div>
+                        <div class="tap profile"></div>
+                        <img src="my photo2.webp" alt="myPhoto" class="slide profile">
+                    </div>
                 </div>
             </div>
             <!--=========== skills ===========-->
@@ -1159,8 +1203,15 @@
                     <div class="myskillbefore my-10">
                         <p></p>
                     </div>
-                    <h4 class="myskill">basic gsap</h4>
+                    <h4 class="myskill">basic gsap & ScrollTrigger</h4>
                     <img src="gsap.webp" alt="gsap img">
+                </div>
+                <div class="keyskillscontainer">
+                    <div class="myskillbefore my-10">
+                        <p></p>
+                    </div>
+                    <h4 class="myskill">Learning React js</h4>
+                    <img src="react.js-img-1536x864.webp" alt="ReactJS img">
                 </div>
                 <div class="keyskillscontainer">
                     <div class="myskillbefore my-10">
@@ -1174,8 +1225,8 @@
         <!--============ projects  ==============-->
         <section id="projects">
             <!-- <div class="ball"></div> -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="ball" fill="none" viewBox="0 0 200 200"
-                version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ball" fill="none" viewBox="0 0 200 200" version="1.1"
+                xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs">
                 <g clip-path="url(#clip0_118_208)">
                     <path fill="url(&quot;#SvgjsLinearGradient1649&quot;)"
                         d="M100 200c-2.895-94.738-5.262-97.09-100-100 94.738-2.895 97.09-5.262 100-100 2.895 94.738 5.262 97.09 100 100-94.738 2.91-97.09 5.233-100 100Z">
@@ -1196,12 +1247,12 @@
                 <h4 class="text-center">goto sites for better experience</h4>
                 <div class="d-flex">
                     <div class="project projectanm">
-                        <iframe src="https://sunshinesolutions.netlify.app" frameborder="0"></iframe>
+                        <iframe src="https://sunshinesolarsolutions.in" frameborder="0"></iframe>
                         <div class="goto">
                             <p class="text-center">a complete front-end site for sunshine solar solutions bhopal</p>
                             <div class="gotosite d-flexAJ">
-                                <a href="https://sunshinesolutions.netlify.app">see site...</a>
-                                <a href="https://sunshinesolutions.netlify.app"><img src="up-arrow.png" alt="arrow"></a>
+                                <a href="https://sunshinesolarsolutions.in">see site...</a>
+                                <a href="https://sunshinesolarsolutions.in"><img src="up-arrow.png" alt="arrow"></a>
                             </div>
                         </div>
                     </div>
