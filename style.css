@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-body {
+body,
+html {
   scroll-behavior: smooth;
   background-color: #151515;
   color: white;
@@ -13,6 +14,7 @@ body {
   font-family: "Istok Web", sans-serif;
   height: 100%;
   padding-bottom: 100vh;
+  font-size: 16px;
   overflow-x: hidden;
 }
 
@@ -31,7 +33,7 @@ a {
 }
 
 .pd-10 {
-  padding: 10px;
+  padding: 0.625rem;
 }
 
 .py-1rem {
@@ -39,11 +41,11 @@ a {
 }
 
 .my-10 {
-  margin: 10px 0;
+  margin: 0.625rem 0;
 }
 
 .m-10 {
-  margin: 10px;
+  margin: 0.625rem;
 }
 
 .d-none {
@@ -98,7 +100,7 @@ a {
 
 .d-grid-300 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--gridWidth, 300px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(var(--gridWidth, 18.75em), 1fr));
 }
 
 .gap1 {
@@ -163,9 +165,9 @@ main .loaderpage {
   width: 4vh;
   height: 4vh;
   border-radius: 50%;
-  border: 4px solid white;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
+  border: 0.25rem solid white;
+  border-top: 0.25rem solid transparent;
+  border-bottom: 0.25rem solid transparent;
   transition: all 1s linear;
   animation: load 0.5s linear infinite;
 }
@@ -177,20 +179,20 @@ main .loaderpage {
 }
 /* //========== nav  */
 nav {
-  padding: 10px 5%;
+  padding: 0.625rem 5%;
   z-index: 2;
   position: sticky;
   top: 0;
   background-color: rgba(49, 45, 66, 0.1);
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(0.25rem);
+          backdrop-filter: blur(0.25rem);
 }
 
 nav .img {
-  width: 60px;
-  height: 60px;
+  width: 3.75rem;
+  height: 3.75rem;
   display: inline-block;
-  padding: 3px;
+  padding: 0.1875rem;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
@@ -236,7 +238,7 @@ nav .hamburger {
 #about {
   position: sticky;
   top: 80px;
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .home {
@@ -249,7 +251,7 @@ nav .hamburger {
 }
 
 .home h1:nth-child(2) {
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   font-size: 8vw;
 }
 
@@ -257,7 +259,7 @@ nav .hamburger {
   position: relative;
   height: 9vw;
   font-size: 5vw;
-  margin: 10px 0;
+  margin: 0.625rem 0;
   overflow: hidden;
   color: lawngreen;
 }
@@ -272,7 +274,7 @@ nav .hamburger {
 }
 
 .home .twolines > .gray {
-  word-spacing: 2px;
+  word-spacing: 0.125rem;
 }
 
 /*========== about  ====*/
@@ -286,11 +288,11 @@ nav .hamburger {
   display: grid;
   align-content: space-around;
   justify-content: center;
-  word-spacing: 2px;
+  word-spacing: 0.125rem;
 }
 
 .about .d-grid-300 .aboutme > p {
-  padding: 20px 40px;
+  padding: 1.25rem 2.5rem;
 }
 
 .skewelm {
@@ -305,20 +307,20 @@ nav .hamburger {
 }
 
 .about .d-grid-300 .aboutimg img {
-  width: var(--imgWH, 300px);
-  height: var(--imgWH, 300px);
+  width: var(--imgWH, 18.75em);
+  height: var(--imgWH, 18.75em);
   border-radius: 50%;
 }
 
 /*=============== skill  =============*/
 .keyskillscontainer {
-  padding: 10px 10px 0;
+  padding: 0.625rem 0.625rem 0;
 }
 
 .myskillbefore {
   width: 100%;
   position: relative;
-  height: 2px;
+  height: 0.125rem;
   background-color: rgb(0, 0, 0);
   /* z-index: 2; */
 }
@@ -338,14 +340,14 @@ nav .hamburger {
 }
 
 .keyskillscontainer .myskill {
-  padding: 15px 10px 5px;
+  padding: 15px 0.625rem 5px;
   font-weight: 500;
 }
 
 /*======== projects  ========*/
 #projects {
   background-color: rgba(255, 255, 255, 0.0509803922);
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .projectsContainer .d-flex {
@@ -359,7 +361,7 @@ nav .hamburger {
 
 .project {
   height: 450px;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   overflow: hidden;
   display: flex;
 }
@@ -372,8 +374,8 @@ nav .hamburger {
 
 .project .goto {
   background-color: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(0.1875rem);
+          backdrop-filter: blur(0.1875rem);
   transition: all 0.3s linear;
   transform: translateX(-100%);
   opacity: 0;
@@ -389,32 +391,35 @@ nav .hamburger {
 .goto .gotosite {
   margin-top: auto;
   margin-bottom: 1.5rem;
-  padding: 10px 30px;
+  padding: 0.625rem 1.875rem;
 }
 
-@media screen and (min-width: 1000px) {
-  .name {
-    font-size: 2.4rem;
-  }
-}
 @media screen and (max-width: 650px) {
   .name {
     font-size: 1.8rem;
   }
 }
 @media screen and (max-width: 450px) {
+  body,
+  html {
+    font-size: 15px;
+  }
   .name {
     font-size: 1.4rem;
   }
   .about .d-grid-300 .aboutimg img {
-    width: 250px;
-    height: 250px;
+    width: 15.625rem;
+    height: 15.625rem;
   }
   .about .d-grid-300 .aboutme > p {
-    padding: 20px 22px;
+    padding: 1.25rem 1.375rem;
   }
 }
 @media screen and (max-width: 350px) {
+  body,
+  html {
+    font-size: 14px;
+  }
   .name {
     font-size: 1.3rem;
   }
@@ -422,5 +427,10 @@ nav .hamburger {
 @media screen and (max-width: 280px) {
   .name {
     font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .name {
+    font-size: 2.4rem;
   }
 }/*# sourceMappingURL=style.css.map */
