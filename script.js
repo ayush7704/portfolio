@@ -24,8 +24,7 @@ timeline.to('.loadermiddle .parent .child', {
     onStart: () => { gsap.to('body', { overflow: 'hidden' }) },
 })
 
-window.addEventListener('load', () => {
-    console.log('loaded')
+window.addEventListener('load', () => {    
     timeline.to('.child', {
         transform: 'translateY(-100%)',
         ease: Power3.easeInOUT,
@@ -54,9 +53,6 @@ window.addEventListener('load', () => {
     }).from('.img .before', {
         animation: 'rotate 0.2s linear infinite',
         duration: 0.3
-    }).to('.name', {
-        duration: 0.5,
-        webkitTextStroke: 1 + 'px white'
     }).from('.hamburger', {
         scale: 0,
         ease: Power4,
@@ -116,10 +112,10 @@ function width() {
         }, {
             backgroundSize: '100% 100%',
             scrollTrigger: {
-                // scroller:'.wrapper',
+                scroller:'body',
                 trigger: '#main .aboutme .technogiq',
                 start: 'top 80%',
-                end: 'top 50%',
+                end: 'top 55%',
                 scrub: 1,
                 // markers:true
             }
@@ -138,16 +134,15 @@ function width() {
             transition: 'none',
             ease: 'none',
             scrollTrigger: {
-                // scroller:'.wrapper',
+                scroller:'body',
                 trigger: '#main .aboutme',
                 start: 'top 250%',
-                end: 'top 40%',
+                end: 'top 55%',
                 scrub: 1,
                 // pin:true, pinSpacing:false
                 // markers:true
             }
-        })
-        console.log('hem')
+        })        
     }
 
     const obserber3 = new IntersectionObserver((slides) => {
@@ -183,10 +178,8 @@ document.querySelector('.hamburger').addEventListener('click', (event) => {
         on.classList.toggle('d-none')
         off.classList.toggle('d-none')
         bookmarks.classList.toggle('d-none')
-        blur.classList.toggle('zIndex')
-        console.log('sideinter')
-    }
-    console.log('beechka')
+        blur.classList.toggle('zIndex')        
+    }    
     let intm = gsap.timeline()
     if (on.classList.contains('d-none')) {
         sidebar()
@@ -202,8 +195,7 @@ document.querySelector('.hamburger').addEventListener('click', (event) => {
                 duration: 0.6,
                 // ease: 'none'
                 ease: "circ.out",
-            })
-        console.log('pass')
+            })        
     }
 
     else {
@@ -213,8 +205,7 @@ document.querySelector('.hamburger').addEventListener('click', (event) => {
         on.classList.add('d-none')
         off.classList.remove('d-none')
         bookmarks.classList.add('d-none')
-        blur.classList.remove('zIndex')
-        console.log('clicked')
+        blur.classList.remove('zIndex')        
     }
     document.querySelectorAll('.bookmark').forEach((elm) => {
         elm.addEventListener('click', (e) => {
@@ -225,8 +216,7 @@ document.querySelector('.hamburger').addEventListener('click', (event) => {
     })
     document.querySelector('.bluriff').addEventListener('click', () => {
         bookandblur()
-        // intm.reverse()
-        console.log('onsblur')
+        // intm.reverse()        
     })
 })
 
@@ -267,8 +257,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (body.offsetWidth <= '300') {
             document.documentElement.style.setProperty('--gridWidth', body.offsetWidth - 60 + 'px')
             document.documentElement.style.setProperty('--navheight', document.querySelector('nav').offsetHeight + 'px')
-            document.documentElement.style.setProperty('--scrolltop', document.querySelector('nav').offsetHeight + 'px')
-            console.log('aagya')
+            document.documentElement.style.setProperty('--scrolltop', document.querySelector('nav').offsetHeight + 'px')            
             // we minused the padd off the element here for better results
             document.querySelector('.aboutimg img').style.cssText = `width:${body.offsetWidth - 60 + 'px'};height:${body.offsetWidth - 60 + 'px'}`
         }
@@ -363,8 +352,7 @@ document.querySelectorAll('.keyskillscontainer').forEach((keyimgs) => {
                 opacity:1
             })
         }
-        catch (er) {
-            console.log(er)
+        catch (er) {            
         }
     })
     keyimgs.addEventListener('mouseleave', (leave) => {
@@ -374,20 +362,18 @@ document.querySelectorAll('.keyskillscontainer').forEach((keyimgs) => {
                 opacity:0
             })
         }
-        catch (er) {
-            console.log(er)
+        catch (er) {            
         }
     })
     keyimgs.addEventListener('mousemove', (img) => {
-        // console.log(keyimgs.childNodes)
+    // 
         try {
             // keyimgs.childNodes[5].style.left = img.x + 'px';
             gsap.to(keyimgs.childNodes[5],{
                 left:img.clientX +'px'
             })
         }
-        catch (er) {
-            console.log(er)
+        catch (er) {            
         }
     })
 })
@@ -430,8 +416,7 @@ function homecursor() {
         })
 
         clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            console.log("Mouse stopped moving!");
+        timeoutId = setTimeout(() => {            
             gsap.to(homedote, {
                 opacity: 0,
                 scale: '0',
