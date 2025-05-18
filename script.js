@@ -1,42 +1,38 @@
-
-// gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
-// gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-gsap.registerPlugin(ScrollTrigger)
-// ScrollSmoother.create({
-//     smooth: 1,
-//     effects: true,
-//   });
-
-// let smoother = ScrollSmoother.create({
-//     smooth: 2,
-//     effects: true,
-//     // normalizeScroll: true
-//   });
-
 let timeline = gsap.timeline()
+  // { y: '100%', duration: 0, ease: 'cubic-bezier(0, 0.59, 0.2, -0.02)' }, { y: '-200%', duration: 6, stagger: 3, repeatDelay: -1.9, ease: Power3, repeat: -1 },
+
 
 timeline.to('.loadermiddle .parent .child', {
     transform: 'translateX(0%)',
     ease: Power3.easeInOUT,
     opacity: 1,
     color: 'white',
-    stagger: 0.3,
-    onStart: () => { gsap.to('body', { overflow: 'hidden' }) },
+    stagger: 0.1,
+    onStart: () => { gsap.to('body', { overflow: 'hidden' })},
+})
+.fromTo('.loadermiddle .parent .child2', {color:"white",opacity:0 ,transform: 'translateX(3.75rem)',}, {
+    transform: 'translateX(0%)',color:"greenyellow",opacity: 1, duration: 0.4, ease: 'Power3.easeInOUT',onStart:()=>{gsap.to('.loadermiddle .parent .endChilds',{ color:"greenyellow",duration: 0.4, ease: 'linear'})}
 })
 
-window.addEventListener('load', () => {    
+window.addEventListener('load', () => {
+    gsap.registerPlugin(ScrollTrigger)
+    ScrollTrigger.refresh();
     timeline.to('.child', {
         transform: 'translateY(-100%)',
         ease: Power3.easeInOUT,
         duration: 0.3,
-        delay: 0.3,
-    }).to('.loaderpage .loaderdown img', {
+        opacity:0,
+        stagger: 0.05,
+        delay: 0.5,
+    })
+    .to('.loaderpage .loaderdown img', {
         top: '-100vh',
         position: 'relative',
         duration: 0.6,
         ease: Power3.easeInOUT,
         delay: -0.2
-    }).to('main .loaderpage', {
+    })
+    .to('main .loaderpage', {
         height: 0,
         duration: 0.4,
         delay: 0.2,
@@ -48,9 +44,10 @@ window.addEventListener('load', () => {
         delay: '-0.1',
         ease: 'expo',
         onComplete: () => {
-            gsap.to('main .loaderpage', { display: 'none' })
+            gsap.to('main .loaderpage', { display: 'none' })           
         }
-    }).from('.img .before', {
+    })
+    .from('.img .before', {
         animation: 'rotate 0.2s linear infinite',
         duration: 0.3
     }).from('.hamburger', {
@@ -65,23 +62,23 @@ window.addEventListener('load', () => {
         transform: 'rotateX(-90deg)',
         duration: 0.3,
         stagger: 0.3
-    }).fromTo('.skills',
-        { y: '60%', duration: 0, ease:'cubic-bezier(0, 0.59, 0.2, -0.02)'}, { y: '-160%', duration:6, stagger:3, repeatDelay: -1.9, ease: Power3, repeat: -1 },
-    ).from('.twolines p span', {
+    }).from('.twolines p span', {
         y: '100%',
         rotate: '30deg',
         opacity: 0,
         // dispaly:'block',
         duration: 1,
         ease: Power4,
-        delay: '-12'
-    }).from('#projects', {
+        // delay: '-30'
+    }).fromTo('.skills',
+        {y:"200%"},{y:"-200%",stagger:3,ease:Power3,repeat:-1,duration:10,repeatDelay:-4.5,delay:-2.5}
+    ).from('#projectspage', {
         backgroundColor: '#151515',
         duration: 0.6,
         ease: Power1,
         scrollTrigger: {
-            trigger: '#projects',
-            // scroller: '.wrapper',
+            trigger: '#projectspage',
+            scroller: 'body',
             start: 'top 80%',
             end: 'top 80%',
             scrub: 3,
@@ -93,8 +90,9 @@ window.addEventListener('load', () => {
 gsap.to('.ball', {
     rotate: '3000deg',
     scrollTrigger: {
-        trigger: '#projects',
+        trigger: '#projectspage',
         start: 'top bottom',
+        end: "bottom bottom",
         scrub: 3,
         // scroller:'.wrapper'
         // markers:true
@@ -112,38 +110,35 @@ function width() {
         }, {
             backgroundSize: '100% 100%',
             scrollTrigger: {
-                scroller:'body',
+                scroller: 'body',
                 trigger: '#main .aboutme .technogiq',
                 start: 'top 80%',
-                end: 'top 55%',
+                end: 'top 45%',
                 scrub: 1,
                 // markers:true
             }
         })
-    }
-    if (document.body.offsetWidth > '800') {
 
         gsap.fromTo('.rotateX', {
             perspective: '1px',
             rotateX: '-8deg',
-            transition: 'none',
-            ease: 'none',
         }, {
             perspective: '1px',
             rotateX: '0deg',
-            transition: 'none',
+            // transition: 'none',
             ease: 'none',
             scrollTrigger: {
-                scroller:'body',
+                scroller: 'body',
                 trigger: '#main .aboutme',
-                start: 'top 250%',
-                end: 'top 55%',
-                scrub: 1,
+                start: 'top 200%',
+                end: 'top 45%',
+                scrub: 0.9,
                 // pin:true, pinSpacing:false
                 // markers:true
             }
-        })        
+        })
     }
+
 
     const obserber3 = new IntersectionObserver((slides) => {
         slides.forEach((slide) => {
@@ -178,8 +173,8 @@ document.querySelector('.hamburger').addEventListener('click', (event) => {
         on.classList.toggle('d-none')
         off.classList.toggle('d-none')
         bookmarks.classList.toggle('d-none')
-        blur.classList.toggle('zIndex')        
-    }    
+        blur.classList.toggle('zIndex')
+    }
     let intm = gsap.timeline()
     if (on.classList.contains('d-none')) {
         sidebar()
@@ -195,7 +190,7 @@ document.querySelector('.hamburger').addEventListener('click', (event) => {
                 duration: 0.6,
                 // ease: 'none'
                 ease: "circ.out",
-            })        
+            })
     }
 
     else {
@@ -205,7 +200,7 @@ document.querySelector('.hamburger').addEventListener('click', (event) => {
         on.classList.add('d-none')
         off.classList.remove('d-none')
         bookmarks.classList.add('d-none')
-        blur.classList.remove('zIndex')        
+        blur.classList.remove('zIndex')
     }
     document.querySelectorAll('.bookmark').forEach((elm) => {
         elm.addEventListener('click', (e) => {
@@ -257,17 +252,17 @@ window.addEventListener('DOMContentLoaded', () => {
         if (body.offsetWidth <= '300') {
             document.documentElement.style.setProperty('--gridWidth', body.offsetWidth - 60 + 'px')
             document.documentElement.style.setProperty('--navheight', document.querySelector('nav').offsetHeight + 'px')
-            document.documentElement.style.setProperty('--scrolltop', document.querySelector('nav').offsetHeight + 'px')            
+            document.documentElement.style.setProperty('--scrolltop', document.querySelector('nav').offsetHeight + 'px')
             // we minused the padd off the element here for better results
             document.querySelector('.aboutimg img').style.cssText = `width:${body.offsetWidth - 60 + 'px'};height:${body.offsetWidth - 60 + 'px'}`
         }
         else {
-
             document.querySelector('.aboutimg img').style.cssText = ''
         }
     }
     setproperty()
     window.addEventListener('resize', () => {
+        ScrollTrigger.refresh();
         setproperty()
         width()
     })
@@ -276,7 +271,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // intersecting observer animation 
 const skillcontainer = document.querySelectorAll('.keyskillscontainer');
 const projects = document.querySelectorAll('.project');
-const contact = document.querySelectorAll('#contact')
+const contact = document.querySelectorAll('#contactpage')
 
 let observer = new IntersectionObserver((events) => {
     events.forEach((e) => {
@@ -336,50 +331,49 @@ document.querySelector('.numbercopy').addEventListener('click', () => {
     navigator.clipboard.writeText(9754742477)
     navigator.vibrate([100, 100, 100])
     setTimeout(() => {
-        document.querySelector('.copytext').style.display = 'block'
+        gsap.fromTo('.copytext', { display: 'none', opacity: 0 }, { display: 'block', opacity: 1, duration: 0.2, })
+        // document.querySelector('.copytext').style.display = 'block'
     }, 100)
     setTimeout(() => {
-        document.querySelector('.copytext').style.display = 'none'
-    }, 1000)
+        gsap.fromTo('.copytext', { display: 'block', opacity: 1 }, { display: 'none', opacity: 0, duration: 0.3, })
+        // document.querySelector('.copytext').style.display = 'none'
+    }, 1500)
 })
 
 //========= hover animation on skills 
 document.querySelectorAll('.keyskillscontainer').forEach((keyimgs) => {
+    const img = keyimgs.querySelector('img')    
     keyimgs.addEventListener('mouseenter', (enter) => {
         try {
-            // keyimgs.childNodes[5].style.opacity = '1';
-            gsap.to(keyimgs.childNodes[5],{
-                opacity:1
+            gsap.to(img, {
+                opacity: 1
             })
         }
-        catch (er) {            
+        catch (er) {
         }
     })
     keyimgs.addEventListener('mouseleave', (leave) => {
         try {
-            // keyimgs.childNodes[5].style.opacity = '0'
-            gsap.to(keyimgs.childNodes[5],{
-                opacity:0
+            gsap.to(img, {
+                opacity: 0
             })
         }
-        catch (er) {            
+        catch (er) {
         }
     })
-    keyimgs.addEventListener('mousemove', (img) => {
-    // 
+    keyimgs.addEventListener('mousemove', (move) => {
         try {
-            // keyimgs.childNodes[5].style.left = img.x + 'px';
-            gsap.to(keyimgs.childNodes[5],{
-                left:img.clientX +'px'
+            gsap.to(img, {
+                left: move.layerX + 'px'
             })
         }
-        catch (er) {            
+        catch (er) {
         }
     })
 })
 
 function projectball() {
-    let projects = document.querySelector('#projects')
+    let projects = document.querySelector('#projectspage')
     let ball = document.querySelector('.ball');
     projects.addEventListener('mouseenter', (dets) => {
         gsap.to(ball, {
@@ -416,7 +410,7 @@ function homecursor() {
         })
 
         clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {            
+        timeoutId = setTimeout(() => {
             gsap.to(homedote, {
                 opacity: 0,
                 scale: '0',
@@ -444,5 +438,13 @@ function homecursor() {
     }, 500)
 }
 homecursor()
+
+
+// function scrollToView(id) {
+//     const element = document.getElementById(id);
+//     if (!element) return;   
+//     element.scrollIntoView()
+// }
+
 
 

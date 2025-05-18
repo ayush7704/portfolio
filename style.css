@@ -5,17 +5,19 @@
   z-index: 0;
 }
 
+:root {
+  --themeColor:#90ff02;
+}
+
 body,
 html {
   scroll-behavior: smooth;
   background-color: #151515;
   color: white;
-  text-transform: uppercase;
   /* // font-family: 'Krona One', sans-serif; */
   font-family: "Istok Web", sans-serif;
   height: 100%;
-  /* padding-bottom: 100vh; */
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   scroll-padding-top: var(--scrolltop, 5rem);
   font-size: 16px;
   font-family: "Signika Negative", serif;
@@ -23,19 +25,15 @@ html {
 }
 
 ::-moz-selection {
-  background: #90ff02;
+  background: var(--themeColor);
   font-weight: bold;
   color: black;
 }
 
 ::selection {
-  background: #90ff02;
+  background: var(--themeColor);
   font-weight: bold;
   color: black;
-}
-
-body::-webkit-scrollbar {
-  display: none;
 }
 
 a {
@@ -51,6 +49,7 @@ a {
 
 .gray {
   color: #a2a2a2;
+  padding: 2.5rem 0;
 }
 
 .pd-10 {
@@ -59,6 +58,10 @@ a {
 
 .py-1rem {
   padding: 1rem 0;
+}
+
+.pb-1rem {
+  padding-bottom: 1rem;
 }
 
 .my-10 {
@@ -140,11 +143,11 @@ a {
   z-index: 1;
 }
 
-/* //============= main container  ============*/
-main {
-  /* min-height: 100vh; */
+.containers {
+  padding: 1.25rem 3.75rem;
 }
 
+/* //============= main container  ============*/
 main .loaderpage {
   position: fixed;
   top: 0;
@@ -153,8 +156,7 @@ main .loaderpage {
   height: 100%;
   background-color: rgb(10, 10, 10);
   color: white;
-  text-transform: uppercase;
-  z-index: 10;
+  z-index: 100;
   /*display: none;*/
 }
 
@@ -179,7 +181,7 @@ main .loaderpage {
   display: inline-block;
 }
 
-.loaderpage .loadermiddle .parent .child {
+.loaderpage .loadermiddle .parent .child, .loaderpage .child2 {
   display: inline-block;
   transform: translateX(3.75rem);
   color: greenyellow;
@@ -208,8 +210,8 @@ nav {
   position: sticky;
   top: 0;
   background-color: rgba(49, 45, 66, 0.1);
-  -webkit-backdrop-filter: blur(0.25rem);
-          backdrop-filter: blur(0.25rem);
+  -webkit-backdrop-filter: blur(0.45rem);
+  backdrop-filter: blur(0.45rem);
 }
 
 nav .img {
@@ -234,7 +236,7 @@ nav .img .before {
   height: 100%;
   animation: rotate 1s linear infinite;
   position: absolute;
-  background: linear-gradient(to right, gray 20%, #90ff02 112%);
+  background: linear-gradient(to right, gray 20%, var(--themeColor) 112%);
 }
 
 @keyframes rotate {
@@ -280,6 +282,7 @@ nav .bookmarks {
   border-left: none;
   text-align: end;
   position: absolute;
+  z-index: 100;
   border-radius: 1.25rem;
 }
 
@@ -299,7 +302,6 @@ nav .bookmarks {
   rotate: 3deg;
   transform: translateY(0.1875rem);
   overflow: hidden;
-  box-shadow: 0 0 0.3125rem 0.0625rem #d72dff;
 }
 
 .bookmark:nth-child(1):before {
@@ -317,7 +319,6 @@ nav .bookmarks {
   rotate: 8deg;
   background-color: #151515;
   transform: translate(1.25rem, 19%);
-  box-shadow: 0 0 0.3125rem 0.0625rem white;
 }
 
 .bookmark:nth-child(2) a:nth-child(2) {
@@ -328,7 +329,6 @@ nav .bookmarks {
   rotate: 13deg;
   background-color: rgb(40, 40, 40);
   transform: translate(2.5rem, 35%);
-  box-shadow: 0 0 0.3125rem 0.0625rem #ebe97a;
 }
 
 .bookmark:nth-child(3) a:nth-child(2) {
@@ -339,7 +339,6 @@ nav .bookmarks {
   rotate: 18deg;
   background-color: #151515;
   transform: translate(3.75rem, 51%);
-  box-shadow: 0 0 0.3125rem 0.0625rem rgb(85, 26, 139);
 }
 
 .bookmark:nth-child(4) a:nth-child(2) {
@@ -349,6 +348,7 @@ nav .bookmarks {
 /* //========= home */
 .home {
   text-transform: uppercase;
+  text-transform: initial;
   padding: 1.25rem;
   position: relative;
 }
@@ -367,12 +367,14 @@ nav .bookmarks {
 .home h1:nth-of-type(1) {
   font-size: 7vw;
   padding-bottom: 0;
-  text-shadow: black 0.125rem 0.25rem 0.125rem;
 }
 
 .home h1:nth-of-type(2) {
   margin-bottom: 0.625rem;
-  font-size: 8vw;
+  font-size: 7vw;
+}
+
+.home h1 {
   text-shadow: black 0.125rem 0.25rem 0.125rem;
 }
 
@@ -413,6 +415,8 @@ nav .bookmarks {
 
 .home .twolines > p {
   word-spacing: 2px;
+  padding: 5px 0;
+  text-transform: initial;
 }
 
 .homedote {
@@ -438,7 +442,6 @@ nav .bookmarks {
 }
 /*========== about  ====*/
 .about {
-  padding: 1.25rem;
   width: 100%;
   background-color: #151515;
   overflow: hidden;
@@ -448,13 +451,21 @@ nav .bookmarks {
   display: grid;
   align-content: space-around;
   justify-content: center;
-  word-spacing: 2px;
+  row-gap: 2rem;
   /* overflow-x: hidden; */
 }
 
 .about .d-grid-300 .aboutme > p {
-  padding: 1.25rem 2.5rem;
   line-height: 1.4;
+}
+
+.rotateX {
+  transform: perspective(1px) rotateX(-4deg);
+  overflow: hidden;
+}
+
+.norotateX {
+  transform: perspective(1px) rotateX(0deg);
 }
 
 .aboutme a {
@@ -462,11 +473,17 @@ nav .bookmarks {
   border: 0.0625rem solid;
   border-radius: 0.375rem;
   font-weight: 500;
-  margin: 1.25rem 2.5rem;
+  margin: 1.25rem 0;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+  color: var(--themeColor);
+  box-shadow: 0px 0px 3.6125rem -1.425rem;
   transition: all 0.3s linear;
+}
+
+.aboutme a:is(:hover, :active) {
+  box-shadow: 0px 0px 3.6125rem -1.225rem;
 }
 
 .aboutme .technogiq {
@@ -475,9 +492,9 @@ nav .bookmarks {
   background-size: 0% 100%;
   background-repeat: no-repeat;
   -webkit-background-clip: text;
-          background-clip: text;
-  /* background-color: #90ff02; */
-  background-image: linear-gradient(#90ff02, #90ff02);
+  background-clip: text;
+  /* background-color: var(--themeColor); */
+  background-image: linear-gradient(var(--themeColor), var(--themeColor));
 }
 
 .technogiq100 {
@@ -485,25 +502,10 @@ nav .bookmarks {
   transition: all 1s linear;
 }
 
-.aboutme a:hover {
-  color: royalblue;
-  box-shadow: 0 0 0.3125rem 0.0625rem;
-}
-
 .about a img {
   width: 2.1875rem;
   height: 2.1875rem;
   margin-right: 0.3125rem;
-}
-
-.rotateX {
-  transform: perspective(1px) rotateX(-4deg);
-  transition: all 1s linear;
-  overflow: hidden;
-}
-
-.norotateX {
-  transform: perspective(1px) rotateX(0deg);
 }
 
 .aboutimg,
@@ -515,25 +517,26 @@ nav .bookmarks {
   width: var(--imgWH, 18.75rem);
   height: var(--imgWH, 18.75rem);
   border-radius: 50%;
-  transition: all 0.3s linear;
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 .about .aboutimg img:hover {
-  scale: 1.1;
+  scale: 1.05;
 }
 
 .tap {
   position: absolute;
-  transform: translate(-50%, -75%);
-  top: 75%;
+  transform: translate(-50%, -85%) scale(0);
+  top: 85%;
   z-index: 2;
   left: 50%;
   animation: tap 1s linear infinite;
   background-color: gray;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   box-shadow: 0 0 0.5625rem 0.125rem rgb(15, 15, 15);
+  pointer-events: none;
 }
 
 .tap:hover .aboutimg img {
@@ -542,40 +545,42 @@ nav .bookmarks {
 
 @keyframes tap {
   0% {
-    scale: 0;
+    transform: translate(-50%, -85%) scale(0.4);
     opacity: 1;
   }
   100% {
-    scale: 1;
+    transform: translate(-50%, -85%) scale(1);
     opacity: 0;
   }
 }
 /*=============== skill  =============*/
 .keyskills {
   overflow-x: hidden;
+  margin-top: 2rem;
 }
 
 .keyskillscontainer {
-  padding: 0.625rem 0.625rem 0;
+  padding: 0;
   position: relative;
+  overflow: hidden;
 }
 
 .keyskillscontainer img {
   position: absolute;
   width: 4.375rem;
-  height: 4.375rem;
+  height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
-  top: 1.375rem;
+  object-position: center;
+  top: 0;
   left: 50%;
   z-index: -1;
   opacity: 0;
   transition: all linear 0.2s;
   border-radius: 50%;
   transform: translate(-50%);
-  transition: left 100ms linear, opacity 0.2s linear, scale 0.2s linear;
+  transition: left 100ms cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), scale 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 .myskillbefore {
@@ -600,26 +605,71 @@ nav .bookmarks {
 }
 
 .keyskillscontainer .myskill {
-  padding: 0.9375rem 0.625rem 0.3125rem;
+  padding: 1.5625rem 0.625rem 1.5625rem;
   font-weight: 500;
   color: white;
   mix-blend-mode: difference;
 }
 
 /*======== projects  ========*/
-#projects {
+.projects {
   background-color: rgba(255, 255, 255, 0.0509803922);
-  padding: 1.25rem;
   position: relative;
   overflow: hidden;
 }
 
-#projects .blur {
+.latestPortfolio {
+  background-color: #151515;
+  color: var(--themeColor);
+  font-size: 0.9em;
+  margin-left: 3rem;
+}
+
+.relativeBlink {
+  display: inline-block;
+  position: relative;
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.ping {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background-color: var(--themeColor);
+  animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.dot {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background-color: var(--themeColor);
+  border-radius: 9999px;
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+.projects .blur {
   position: absolute;
   inset: 0;
   z-index: -1;
   -webkit-backdrop-filter: blur(0.3125rem);
-          backdrop-filter: blur(0.3125rem);
+  backdrop-filter: blur(0.3125rem);
+  /* pointer-events: none; */
 }
 
 .ball {
@@ -655,7 +705,11 @@ nav .bookmarks {
   overflow: hidden;
   flex: 0 1 23.875rem;
   display: flex;
-  transition: 0.6s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.projectName {
+  color: var(--themeColor);
 }
 
 .projectanm {
@@ -677,7 +731,7 @@ nav .bookmarks {
 .project .goto {
   background-color: rgba(33, 33, 33, 0.96);
   -webkit-backdrop-filter: blur(0.1875rem);
-          backdrop-filter: blur(0.1875rem);
+  backdrop-filter: blur(0.1875rem);
   transition: all 0.3s linear;
   transform: translateX(-100%);
   opacity: 0;
@@ -695,7 +749,7 @@ nav .bookmarks {
 }
 
 .goto p {
-  padding: 0.625rem 3.75rem;
+  padding: 0.625rem 2.75rem;
   font-weight: 600;
   font-size: 0.9375rem;
 }
@@ -723,14 +777,9 @@ nav .bookmarks {
 }
 
 /*========== contact  ==========*/
-#contact {
-  padding: 1.25rem;
-  padding-bottom: 1.875rem;
-}
-
-#contact .d-grid-300 a,
-#contact .d-grid-300 .connectlink a {
-  border: 0.0625rem solid rgb(85, 26, 139);
+.contact .d-grid-300 a,
+.contact .d-grid-300 .connectlink a {
+  border: 0.0625rem solid rgba(85, 26, 139, 0.7490196078);
   border-radius: 0.625rem;
   padding: 1.5625rem 0.9375rem;
   color: white;
@@ -739,10 +788,11 @@ nav .bookmarks {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 0 0.3125rem 0.0625rem rgb(85, 26, 139);
+  box-shadow: 0 0 4rem -1.4rem rgb(85, 26, 139);
 }
 
-#contact .d-grid-300:nth-child(2) a:hover,
-#contact .d-grid-300:nth-child(2) a:hover .before {
+.contact .d-grid-300:nth-child(2) a:hover,
+.contact .d-grid-300:nth-child(2) a:hover .before {
   scale: 1;
   opacity: 1;
   color: black;
@@ -759,14 +809,14 @@ nav .bookmarks {
   z-index: -1;
 }
 
-#contact .d-grid-300 a img {
+.contact .d-grid-300 a img {
   width: 2.5rem;
   height: 2.5rem;
   margin-left: 0.625rem;
   border-radius: 20%;
 }
 
-#contact .d-grid-300 .connectlink .before {
+.contact .d-grid-300 .connectlink .before {
   content: "";
   position: absolute;
   background: rgba(85, 26, 139, 0.35);
@@ -776,9 +826,14 @@ nav .bookmarks {
 }
 
 /* something happend that i disable to solve  thats why i use this */
-#contact span,
+.contact span,
 img {
   z-index: 1;
+}
+
+.connectlinks {
+  gap: 2rem;
+  padding: 2rem;
 }
 
 .connectlink a:hover .before {
@@ -786,17 +841,22 @@ img {
   transition: 0.2s linear;
 }
 
+.contactme {
+  margin-bottom: 2rem;
+}
+
 .contactme .numbercopy {
-  width: 5rem;
-  height: 5rem;
+  padding: 1rem;
+  margin: 1rem;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
+  transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .contactme .numbercopy img {
-  width: 3.125rem;
-  height: 3.125rem;
+  width: 2.125rem;
+  height: 2.125rem;
 }
 
 /*================ copy to clipboard ================*/
@@ -806,20 +866,22 @@ img {
   left: 50%;
   font-weight: bold;
   transform: translate(-50%, -50%);
-  background-color: rgba(128, 128, 128, 0.5803921569);
+  background-color: rgba(0, 0, 0, 0.7294117647);
   color: #ffffff;
   display: none;
   padding: 0.625rem 0.9375rem;
   font-size: 0.9375rem;
-  border-radius: 0.25rem;
+  border-radius: 0.35rem;
   z-index: 5;
-  -webkit-backdrop-filter: blur(0.9375rem);
-          backdrop-filter: blur(0.9375rem);
+  -webkit-backdrop-filter: blur(1.9375rem);
+  backdrop-filter: blur(1.9375rem);
+  box-shadow: 0px 0px 13px -7px #858585;
 }
 
 .bluriff {
   -webkit-backdrop-filter: blur(0.125rem);
-          backdrop-filter: blur(0.125rem);
+  backdrop-filter: blur(0.125rem);
+  background-color: rgba(0, 0, 0, 0.5019607843);
   position: fixed;
   height: 100%;
   overflow: hidden;
@@ -838,8 +900,8 @@ img {
   inset: 0;
   z-index: -2;
   opacity: 0;
-  -webkit-backdrop-filter: blur(0.125rem);
-          backdrop-filter: blur(0.125rem);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
 }
 
 .myphotocontainer {
@@ -851,7 +913,7 @@ img {
   height: var(--myphoto, 25rem);
   border-radius: 50%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .myphoto .remove {
@@ -865,6 +927,7 @@ img {
 .goupcontainer {
   position: fixed;
   bottom: 2%;
+  overflow: hidden;
   width: 3.125rem;
   height: 3.125rem;
   background-color: whitesmoke;
@@ -874,29 +937,56 @@ img {
   z-index: 1;
 }
 
-.goup {
-  position: absolute;
-  inset: 0;
-  text-align: center;
-  color: #000000;
-  font-size: 2rem;
+.goupcontainerChild {
+  height: 100%;
+  display: grid;
+  place-content: center;
 }
 
-@media screen and (max-width: 650px) {
+.goupcontainer a {
+  line-height: 0;
+}
+
+.goupcontainer svg {
+  height: 1.35rem;
+  width: 1.35rem;
+}
+
+@media (max-width: 800px) {
+  .rotateX {
+    transition: all 1s linear;
+  }
+}
+@media (max-width: 650px) {
+  .home h1, .skillcontainer .skills {
+    text-shadow: black 0.125rem 0.25rem 0.225rem;
+  }
   .name {
     font-size: 1.8rem;
   }
   .ball {
     display: none;
   }
+  .containers {
+    padding: 1.25rem 3.5rem;
+  }
+  nav .hamburger {
+    font-size: 1.7rem;
+  }
+  .connectlinks {
+    padding: 1rem;
+  }
 }
-@media screen and (max-width: 450px) {
+@media (max-width: 450px) {
   body,
   html {
     font-size: 15px;
   }
   .name {
     font-size: 1.4rem;
+  }
+  .containers {
+    padding: 1.25rem 2rem;
   }
   .skillcontainer {
     font-size: 4.5vw;
@@ -905,14 +995,8 @@ img {
     width: 15.625rem;
     height: 15.625rem;
   }
-  .about .d-grid-300 .aboutme > p {
-    padding: 1.25rem 1.375rem;
-  }
   .aboutme .technogiq {
     font-size: 1.2rem;
-  }
-  .about .d-grid-300 .aboutme > a {
-    margin: 1.25rem 1.375rem;
   }
   .d-grid-300 {
     grid-template-columns: repeat(auto-fit, minmax(var(--gridWidth, 16.25rem), 1fr));
@@ -920,34 +1004,23 @@ img {
   .myskillbefore p {
     transition: 0.3s linear;
   }
-  .keyskillscontainer {
-    padding: 0.625rem 0 0;
-  }
   .project {
     transition: 0.3s linear;
   }
-  #contact .d-grid-300 a img {
+  .contact .d-grid-300 a img {
     width: 1.875rem;
     height: 1.875rem;
   }
-  #contact .d-grid-300 a,
-  #contact .d-grid-300 .connectlink a {
+  .contact .d-grid-300 a,
+  .contact .d-grid-300 .connectlink a {
     padding: 1.25rem 0.9375rem;
-  }
-  .contactme .numbercopy {
-    width: 4.375rem;
-    height: 4.375rem;
-  }
-  .contactme .numbercopy img {
-    width: 2.5rem;
-    height: 2.5rem;
   }
   .myphoto img {
     width: var(--myphoto, 18.75rem);
     height: var(--myphoto, 18.75rem);
   }
 }
-@media screen and (max-width: 350px) {
+@media (max-width: 350px) {
   body,
   html {
     font-size: 14px;
@@ -959,16 +1032,15 @@ img {
   .name {
     font-size: 1.3rem;
   }
-  #projects,
-  #contact {
-    padding: 1.25rem 0.625rem;
-  }
   .myphoto img {
     width: var(--myphoto, 15.625rem);
     height: var(--myphoto, 15.625rem);
   }
+  .containers {
+    padding: 1.25rem 1.55rem;
+  }
 }
-@media screen and (max-width: 280px) {
+@media (max-width: 280px) {
   nav .img {
     width: 2.5rem;
     height: 2.5rem;
@@ -979,8 +1051,8 @@ img {
   nav .hamburger {
     font-size: 1.7rem;
   }
-  #home,
-  #about {
+  .home,
+  .about {
     padding: 1.25rem 0.625rem;
   }
   .d-grid-300 {
@@ -990,16 +1062,16 @@ img {
     width: var(--myphoto, 13.125rem);
     height: var(--myphoto, 13.125rem);
   }
+  .containers {
+    padding: 1.25rem;
+  }
 }
-@media screen and (min-width: 1000px) {
+@media (min-width: 1000px) {
   .name {
     font-size: 2.4rem;
   }
   .home::before {
     filter: brightness(1);
-  }
-  #contact .d-grid-300 a {
-    margin: 2rem;
   }
   nav .hamburger {
     padding: 0 0.625rem;
